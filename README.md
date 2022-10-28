@@ -1,0 +1,1 @@
+Projeto criado para reproduzir algumas telas do PinkGreen em Android
