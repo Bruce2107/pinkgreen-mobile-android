@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/featurePresentationFragment">
+    <fragment android:id="@+id/featurePresentationFragment"
+        android:name="br.com.pinkgreen.mobile.main.ui.view.FeaturePresentationFragment"
+        android:label="FeaturePresentationFragment"
+        tools:layout="@layout/fragment_feature_presentation"
+        >
+        <action
+            android:id="@+id/action_featurePresentationFragment_to_featureSettingsFragment"
+            app:destination="@id/featureSettingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/featureSettingsFragment"
+        android:name="br.com.pinkgreen.mobile.main.ui.view.FeatureSettingsFragment"
+        android:label="FeatureSettingsFragment"
+        tools:layout="@layout/fragment_feature_settings" />
+
+</navigation>

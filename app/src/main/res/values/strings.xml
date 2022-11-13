@@ -1,6 +1,9 @@
 <resources>
-    <string name="app_name">pinkgreen-mobile</string>
-    <string name="login">Login</string>
-    <string name="emailHint">name@host.com</string>
-    <string name="price_template">R$ %1$d</string>
+    <string name="app_name">Pinkgreen</string>
+    <string name="success">Sucesso</string>
+    <string name="error">Erro</string>
+    <string name="search_products">Buscar Produtos</string>
+    <string name="use_mode">Modo de uso</string>
+    <string name="test_mode">Simulado</string>
+    <string name="lib_mode">Lib</string>
 </resources>
