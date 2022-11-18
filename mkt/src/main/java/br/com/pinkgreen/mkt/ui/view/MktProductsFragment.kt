@@ -12,13 +12,16 @@ import br.com.pinkgreen.mkt.databinding.FragmentMktProductsBinding
 import br.com.pinkgreen.mkt.di.CustomKoinComponent
 import br.com.pinkgreen.mkt.ui.components.error.ErrorLauncherParams
 import br.com.pinkgreen.mkt.ui.view.adpaters.MktProductListAdapter
+import br.com.pinkgreen.mkt.ui.view.navigation.MktNavigation
 import br.com.pinkgreen.mkt.ui.viewmodel.MktProductsViewModel
 import br.com.pinkgreen.mkt.ui.viewstate.ErrorType
 import br.com.pinkgreen.mkt.ui.viewstate.ViewState
 import br.com.pinkgreen.mkt.ui.viewstate.collectIfNotNull
-import br.com.pinkgreen.mkt.ui.viewstate.vo.MktProductsResponseVO
+import br.com.pinkgreen.mkt.ui.vo.MktProductsResponseVO
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 import java.lang.ref.WeakReference
 
 internal class MktProductsFragment : Fragment(), CustomKoinComponent {
@@ -26,6 +29,7 @@ internal class MktProductsFragment : Fragment(), CustomKoinComponent {
     private val binding get() = _binding!!
 
     private val viewModel: MktProductsViewModel by viewModel()
+    private val navigation: MktNavigation by inject { parametersOf(this) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -76,7 +80,13 @@ internal class MktProductsFragment : Fragment(), CustomKoinComponent {
 
     private fun onProductsSuccess(data: MktProductsResponseVO) {
         binding.mktProductList.adapter =
-            MktProductListAdapter(activity?.applicationContext!!, data.products)
+            MktProductListAdapter(this, data.products) {
+                fastBuyAction()
+            }
+    }
+
+    private fun fastBuyAction() {
+        navigation.navigateFromListToDetails()
     }
 
 }

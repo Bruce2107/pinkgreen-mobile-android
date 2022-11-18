@@ -1,14 +1,18 @@
 package br.com.pinkgreen.mkt.di.modules
 
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import br.com.pinkgreen.mkt.data.repository.MktProductRepository
 import br.com.pinkgreen.mkt.data.repository.MktProductRepositoryImpl
 import br.com.pinkgreen.mkt.domain.converter.MktProductConverter
 import br.com.pinkgreen.mkt.domain.converter.MktProductsConverter
+import br.com.pinkgreen.mkt.ui.view.navigation.MktNavigation
 import br.com.pinkgreen.mkt.ui.viewmodel.MktProductViewModel
 import br.com.pinkgreen.mkt.ui.viewmodel.MktProductsViewModel
 
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
+import java.lang.ref.WeakReference
 
 val mktModule = module {
     factory<MktProductRepository> {
@@ -22,11 +26,10 @@ val mktModule = module {
         MktProductConverter()
     }
 
-//
-//    factory { (fragment: Fragment) ->
-//        InternshipNavigation(WeakReference(fragment.findNavController()))
-//    }
-//
+    factory { (fragment: Fragment) ->
+        MktNavigation(WeakReference(fragment.findNavController()))
+    }
+
 
     viewModel {
         MktProductsViewModel(get(), get())

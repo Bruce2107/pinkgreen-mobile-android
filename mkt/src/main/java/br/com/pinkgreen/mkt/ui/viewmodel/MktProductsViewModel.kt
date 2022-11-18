@@ -6,7 +6,7 @@ import br.com.pinkgreen.mkt.data.repository.MktProductRepository
 import br.com.pinkgreen.mkt.domain.converter.MktProductsConverter
 import br.com.pinkgreen.mkt.ui.viewstate.ViewState
 import br.com.pinkgreen.mkt.ui.viewstate.collectViewState
-import br.com.pinkgreen.mkt.ui.viewstate.vo.MktProductsResponseVO
+import br.com.pinkgreen.mkt.ui.vo.MktProductsResponseVO
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map

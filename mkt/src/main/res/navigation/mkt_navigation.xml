@@ -7,6 +7,15 @@
     <fragment
         android:id="@+id/mktProductsFragment"
         android:name="br.com.pinkgreen.mkt.ui.view.MktProductsFragment"
-        android:label="InternshipProductsFragment"
-        tools:layout="@layout/fragment_mkt_products" />
+        android:label="MktProductsFragment"
+        tools:layout="@layout/fragment_mkt_products">
+        <action
+            android:id="@+id/action_list_to_product_details"
+            app:destination="@id/mktProductDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mktProductDetailsFragment"
+        android:name="br.com.pinkgreen.mkt.ui.view.MktProductDetailsFragment"
+        android:label="MktProductDetailsFragment"
+        tools:layout="@layout/fragment_mkt_product_details" />
 </navigation>

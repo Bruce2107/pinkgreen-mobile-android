@@ -2,15 +2,18 @@ package br.com.pinkgreen.mkt.ui.view.adpaters
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View.OnClickListener
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import br.com.pinkgreen.mkt.R
 import br.com.pinkgreen.mkt.databinding.MktProductItemBinding
-import br.com.pinkgreen.mkt.ui.viewstate.vo.MktProductResponseVO
+import br.com.pinkgreen.mkt.ui.vo.MktProductResponseVO
 
 internal class MktProductListAdapter(
-    private val context: Context,
-    private val products: List<MktProductResponseVO>
+    private val fragment: Fragment,
+    private val products: List<MktProductResponseVO>,
+    private val onClickListener: OnClickListener
 ) : RecyclerView.Adapter<MktProductListAdapter.ProductListViewHolder>() {
     inner class ProductListViewHolder(private val binding: MktProductItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -18,7 +21,8 @@ internal class MktProductListAdapter(
 //            binding.productImage = item.image
             binding.productName.text = item.name
             binding.productPrice.text =
-               context.getString(R.string.price_template, item.price)
+                fragment.getString(R.string.price_template, item.price)
+            binding.productFastBuy.setOnClickListener(onClickListener)
         }
     }
 
