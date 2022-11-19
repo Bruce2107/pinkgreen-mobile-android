@@ -19,6 +19,36 @@ object MockApiResponse {
                             name = "produto 2",
                             price = 10.2,
                             id = "a7f5fb9d-a143-4da5-bfeb-aadf6027557c"
+                        ),
+                        MktProductResponseDTO(
+                            name = "produto 3",
+                            price = 10.2,
+                            id = "a7f5fb9d-a143-4da5-bfeb-aadf6027557c"
+                        ),
+                        MktProductResponseDTO(
+                            name = "produto 4",
+                            price = 10.2,
+                            id = "a7f5fb9d-a143-4da5-bfeb-aadf6027557c"
+                        ),
+                        MktProductResponseDTO(
+                            name = "produto 5",
+                            price = 10.2,
+                            id = "a7f5fb9d-a143-4da5-bfeb-aadf6027557c"
+                        ),
+                        MktProductResponseDTO(
+                            name = "produto 6",
+                            price = 10.2,
+                            id = "a7f5fb9d-a143-4da5-bfeb-aadf6027557c"
+                        ),
+                        MktProductResponseDTO(
+                            name = "produto 7",
+                            price = 10.2,
+                            id = "a7f5fb9d-a143-4da5-bfeb-aadf6027557c"
+                        ),
+                        MktProductResponseDTO(
+                            name = "produto 8",
+                            price = 10.2,
+                            id = "a7f5fb9d-a143-4da5-bfeb-aadf6027557c"
                         )
                     )
                 )

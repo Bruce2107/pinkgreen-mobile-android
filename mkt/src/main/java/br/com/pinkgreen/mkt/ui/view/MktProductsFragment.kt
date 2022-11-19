@@ -4,10 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import br.com.pinkgreen.mkt.R
 import br.com.pinkgreen.mkt.databinding.FragmentMktProductsBinding
 import br.com.pinkgreen.mkt.di.CustomKoinComponent
 import br.com.pinkgreen.mkt.ui.components.error.ErrorLauncherParams
@@ -45,6 +48,7 @@ internal class MktProductsFragment : Fragment(), CustomKoinComponent {
 
         viewModel.fetchProducts()
         setupObservers()
+        setupNavbar(requireActivity())
     }
 
     private fun setupObservers() {
@@ -80,13 +84,30 @@ internal class MktProductsFragment : Fragment(), CustomKoinComponent {
 
     private fun onProductsSuccess(data: MktProductsResponseVO) {
         binding.mktProductList.adapter =
-            MktProductListAdapter(this, data.products) {
-                fastBuyAction()
-            }
+            MktProductListAdapter(
+                fragment = this,
+                products = data.products,
+                onClickListener = MktProductListAdapter.OnClickListener {
+                    fastBuyAction(it.name)
+                })
     }
 
-    private fun fastBuyAction() {
-        navigation.navigateFromListToDetails()
+    private fun fastBuyAction(id: String) {
+        Toast.makeText(requireContext(), id, Toast.LENGTH_SHORT).show()
+//        navigation.navigateFromListToDetails()
+    }
+
+    private fun setupNavbar(activity: FragmentActivity) = with(binding) {
+        mktHomeNavbar.navbar.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.action_home -> viewModel.fetchProducts()
+                R.id.action_cart -> navigation.navigateToCart(activity)
+                R.id.action_favorite -> navigation.navigateToFavourites(activity)
+                R.id.action_settings -> navigation.navigateToSettings(activity)
+                else -> viewModel.fetchProducts()
+            }
+            true
+        }
     }
 
 }

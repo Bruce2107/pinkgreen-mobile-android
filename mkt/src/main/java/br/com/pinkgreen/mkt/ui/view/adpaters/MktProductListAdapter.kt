@@ -1,8 +1,6 @@
 package br.com.pinkgreen.mkt.ui.view.adpaters
 
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View.OnClickListener
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
@@ -22,7 +20,9 @@ internal class MktProductListAdapter(
             binding.productName.text = item.name
             binding.productPrice.text =
                 fragment.getString(R.string.price_template, item.price)
-            binding.productFastBuy.setOnClickListener(onClickListener)
+            binding.productFastBuy.setOnClickListener {
+                onClickListener.onClick(item)
+            }
         }
     }
 
@@ -38,4 +38,8 @@ internal class MktProductListAdapter(
     }
 
     override fun getItemCount(): Int = products.size
+
+    class OnClickListener(val clickListener: (item: MktProductResponseVO) -> Unit) {
+        fun onClick(item: MktProductResponseVO) = clickListener(item)
+    }
 }
