@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Lifecycle
@@ -48,6 +48,7 @@ internal class MktProductsFragment : Fragment(), CustomKoinComponent {
 
         viewModel.fetchProducts()
         setupObservers()
+        setupVisibility()
         setupNavbar(requireActivity())
     }
 
@@ -80,6 +81,7 @@ internal class MktProductsFragment : Fragment(), CustomKoinComponent {
     }
 
     private fun onProductsLoading() {
+        setupVisibility(loading = true)
     }
 
     private fun onProductsSuccess(data: MktProductsResponseVO) {
@@ -88,13 +90,13 @@ internal class MktProductsFragment : Fragment(), CustomKoinComponent {
                 fragment = this,
                 products = data.products,
                 onClickListener = MktProductListAdapter.OnClickListener {
-                    fastBuyAction(it.name)
+                    fastBuyAction(it.id)
                 })
+        setupVisibility(content = true)
     }
 
-    private fun fastBuyAction(id: String) {
-        Toast.makeText(requireContext(), id, Toast.LENGTH_SHORT).show()
-//        navigation.navigateFromListToDetails()
+    private fun fastBuyAction(id: Int) {
+        navigation.navigateFromListToDetails()
     }
 
     private fun setupNavbar(activity: FragmentActivity) = with(binding) {
@@ -109,5 +111,20 @@ internal class MktProductsFragment : Fragment(), CustomKoinComponent {
             true
         }
     }
+
+    private fun setupVisibility(loading: Boolean = false, content: Boolean = false) =
+        with(binding) {
+            mktHomeLoading.root.isVisible = loading
+            mktHomeContentGroup.isVisible = content
+            if (loading) {
+                root.post {
+                    mktHomeLoading.root.announceForAccessibility(
+                        requireContext().getString(
+                            R.string.loading
+                        )
+                    )
+                }
+            }
+        }
 
 }

@@ -1,8 +1,11 @@
 package br.com.pinkgreen.mobile.main
 
+import br.com.pinkgreen.mkt.data.dto.MktBrandResponseDTO
+import br.com.pinkgreen.mkt.data.dto.MktCategoryResponseDTO
 import br.com.pinkgreen.mkt.data.dto.MktProductResponseDTO
 import br.com.pinkgreen.mkt.data.dto.MktProductsResponseDTO
 import okhttp3.ResponseBody
+import okhttp3.ResponseBody.Companion.toResponseBody
 import retrofit2.Response
 
 object MockApiResponse {
@@ -12,43 +15,137 @@ object MockApiResponse {
                 MktProductsResponseDTO(
                     listOf(
                         MktProductResponseDTO(
-                            name = "produto 1", price = 12.2,
-                            id = "13fefdb1-0b68-4eee-a721-56e1926586b7"
-                        ),
-                        MktProductResponseDTO(
-                            name = "produto 2",
-                            price = 10.2,
-                            id = "a7f5fb9d-a143-4da5-bfeb-aadf6027557c"
-                        ),
-                        MktProductResponseDTO(
-                            name = "produto 3",
-                            price = 10.2,
-                            id = "a7f5fb9d-a143-4da5-bfeb-aadf6027557c"
-                        ),
-                        MktProductResponseDTO(
-                            name = "produto 4",
-                            price = 10.2,
-                            id = "a7f5fb9d-a143-4da5-bfeb-aadf6027557c"
-                        ),
-                        MktProductResponseDTO(
-                            name = "produto 5",
-                            price = 10.2,
-                            id = "a7f5fb9d-a143-4da5-bfeb-aadf6027557c"
-                        ),
-                        MktProductResponseDTO(
-                            name = "produto 6",
-                            price = 10.2,
-                            id = "a7f5fb9d-a143-4da5-bfeb-aadf6027557c"
-                        ),
-                        MktProductResponseDTO(
-                            name = "produto 7",
-                            price = 10.2,
-                            id = "a7f5fb9d-a143-4da5-bfeb-aadf6027557c"
-                        ),
-                        MktProductResponseDTO(
-                            name = "produto 8",
-                            price = 10.2,
-                            id = "a7f5fb9d-a143-4da5-bfeb-aadf6027557c"
+                            id = 1,
+                            name = "Notebook Aspire 5",
+                            price = 3704.05,
+                            active = true,
+                            mainImageUrl = "https://i.imgur.com/PchRPP7.png",
+                            brand = MktBrandResponseDTO(
+                                id = 1,
+                                name = "Acer",
+                                brandImage = "https://i.imgur.com/6wTcxmU.png"
+                            ),
+                            categories = listOf(
+                                MktCategoryResponseDTO(
+                                    id = 1,
+                                    name = "Informatica",
+                                    image = "https://i.imgur.com/PchRPP7.png",
+                                )
+                            )
+                        ), MktProductResponseDTO(
+                            id = 2,
+                            name = "Galaxy S10e",
+                            price = 2400.0,
+                            active = true,
+                            mainImageUrl = "https://i.imgur.com/dkR4vDn.png",
+                            brand = MktBrandResponseDTO(
+                                id = 3,
+                                name = "Samsung",
+                                brandImage = "https://i.imgur.com/OkgdSou.png"
+                            ),
+                            categories = listOf(
+                                MktCategoryResponseDTO(
+                                    id = 3,
+                                    name = "Celulares e smartphones",
+                                    image = "https://i.imgur.com/m6VyNEE.png"
+
+                                )
+                            )
+                        ), MktProductResponseDTO(
+                            id = 3,
+                            name = "Galaxy S10e",
+                            price = 2400.0,
+                            active = true,
+                            mainImageUrl = "https://i.imgur.com/dkR4vDn.png",
+                            brand = MktBrandResponseDTO(
+                                id = 3,
+                                name = "Samsung",
+                                brandImage = "https://i.imgur.com/OkgdSou.png"
+                            ),
+                            categories = listOf(
+                                MktCategoryResponseDTO(
+                                    id = 3,
+                                    name = "Celulares e smartphones",
+                                    image = "https://i.imgur.com/m6VyNEE.png"
+
+                                )
+                            )
+                        ), MktProductResponseDTO(
+                            id = 4,
+                            name = "Galaxy S10e",
+                            price = 2400.0,
+                            active = true,
+                            mainImageUrl = "https://i.imgur.com/dkR4vDn.png",
+                            brand = MktBrandResponseDTO(
+                                id = 3,
+                                name = "Samsung",
+                                brandImage = "https://i.imgur.com/OkgdSou.png"
+                            ),
+                            categories = listOf(
+                                MktCategoryResponseDTO(
+                                    id = 3,
+                                    name = "Celulares e smartphones",
+                                    image = "https://i.imgur.com/m6VyNEE.png"
+
+                                )
+                            )
+                        ), MktProductResponseDTO(
+                            id = 5,
+                            name = "Galaxy S10e",
+                            price = 2400.0,
+                            active = true,
+                            mainImageUrl = "https://i.imgur.com/dkR4vDn.png",
+                            brand = MktBrandResponseDTO(
+                                id = 3,
+                                name = "Samsung",
+                                brandImage = "https://i.imgur.com/OkgdSou.png"
+                            ),
+                            categories = listOf(
+                                MktCategoryResponseDTO(
+                                    id = 3,
+                                    name = "Celulares e smartphones",
+                                    image = "https://i.imgur.com/m6VyNEE.png"
+
+                                )
+                            )
+                        ), MktProductResponseDTO(
+                            id = 6,
+                            name = "Galaxy S10e",
+                            price = 2400.0,
+                            active = true,
+                            mainImageUrl = "https://i.imgur.com/dkR4vDn.png",
+                            brand = MktBrandResponseDTO(
+                                id = 3,
+                                name = "Samsung",
+                                brandImage = "https://i.imgur.com/OkgdSou.png"
+                            ),
+                            categories = listOf(
+                                MktCategoryResponseDTO(
+                                    id = 3,
+                                    name = "Celulares e smartphones",
+                                    image = "https://i.imgur.com/m6VyNEE.png"
+
+                                )
+                            )
+                        ), MktProductResponseDTO(
+                            id = 7,
+                            name = "Galaxy S10e",
+                            price = 2400.0,
+                            active = true,
+                            mainImageUrl = "https://i.imgur.com/dkR4vDn.png",
+                            brand = MktBrandResponseDTO(
+                                id = 3,
+                                name = "Samsung",
+                                brandImage = "https://i.imgur.com/OkgdSou.png"
+                            ),
+                            categories = listOf(
+                                MktCategoryResponseDTO(
+                                    id = 3,
+                                    name = "Celulares e smartphones",
+                                    image = "https://i.imgur.com/m6VyNEE.png"
+
+                                )
+                            )
                         )
                     )
                 )
@@ -58,6 +155,6 @@ object MockApiResponse {
 
 
     val error: Response<Any> by lazy {
-        Response.error(400, ResponseBody.create(null, "Bad Request"))
+        Response.error(400, "Bad Request".toResponseBody(null))
     }
 }

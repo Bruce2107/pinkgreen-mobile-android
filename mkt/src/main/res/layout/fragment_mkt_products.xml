@@ -5,24 +5,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include
+        android:id="@+id/mkt_home_loading"
+        layout="@layout/loading_screen"
+        android:visibility="gone" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/mkt_home_content_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="mkt_products_header, mkt_home_navbar, mkt_home_scroll_view"
+        tools:visibility="visible" />
+
     <TextView
         android:id="@+id/mkt_products_header"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Ola"
+        android:text="@string/app_name"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/mkt_home_vertical_guideline_start"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
+        android:id="@+id/mkt_home_scroll_view"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="56dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/mkt_home_vertical_guideline_end"
+        app:layout_constraintStart_toStartOf="@id/mkt_home_vertical_guideline_start"
         app:layout_constraintTop_toBottomOf="@+id/mkt_products_header">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -36,9 +50,22 @@
             app:layout_constraintTop_toBottomOf="parent"
             tools:itemCount="8"
             tools:layout="@layout/mkt_product_item"
-            tools:listitem="@layout/mkt_product_item"
-            />
+            tools:listitem="@layout/mkt_product_item" />
     </androidx.core.widget.NestedScrollView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/mkt_home_vertical_guideline_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="24dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/mkt_home_vertical_guideline_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="24dp" />
 
     <include
         android:id="@+id/mkt_home_navbar"

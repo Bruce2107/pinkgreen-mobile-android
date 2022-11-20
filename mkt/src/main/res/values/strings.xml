@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">pinkgreen-mobile</string>
     <string name="login">Login</string>
+    <string name="loading">Carregando</string>
     <string name="emailHint">name@host.com</string>
     <string name="price_template">R$ %1$.2f</string>
 </resources>

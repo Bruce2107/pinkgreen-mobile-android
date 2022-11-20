@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.pinkgreen.mkt.R
 import br.com.pinkgreen.mkt.databinding.MktProductItemBinding
 import br.com.pinkgreen.mkt.ui.vo.MktProductResponseVO
+import coil.load
 
 internal class MktProductListAdapter(
     private val fragment: Fragment,
@@ -16,7 +17,10 @@ internal class MktProductListAdapter(
     inner class ProductListViewHolder(private val binding: MktProductItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: MktProductResponseVO) {
-//            binding.productImage = item.image
+            binding.productImage.load(item.mainImage) {
+                crossfade(true)
+                placeholder(R.drawable.ic_favorite_24)
+            }
             binding.productName.text = item.name
             binding.productPrice.text =
                 fragment.getString(R.string.price_template, item.price)
