@@ -13,6 +13,8 @@ import br.com.pinkgreen.mobile.main.MockApiResponse
 import br.com.pinkgreen.mobile.lib.PinkgreenApiImpl
 import br.com.pinkgreen.mobile.main.ui.view.adapters.PinkgreenApiOptionsAdapter
 import br.com.pinkgreen.mobile.main.ui.vo.PinkgreenFetchProductsOption
+import br.com.pinkgreen.mobile.utils.Utils
+import retrofit2.Response
 
 class FeatureSettingsFragment : Fragment() {
     private var _binding: FragmentFeatureSettingsBinding? = null
@@ -47,7 +49,8 @@ class FeatureSettingsFragment : Fragment() {
     }
 
     private fun setupViews() {
-        binding.internshipApiOptions.adapter = PinkgreenApiOptionsAdapter(apiOptions)
+        binding.internshipApiOptions.adapter =
+            PinkgreenApiOptionsAdapter(requireActivity().application, apiOptions)
 
         binding.internshipButton.setOnClickListener {
             startFeature()
@@ -55,10 +58,19 @@ class FeatureSettingsFragment : Fragment() {
     }
 
     private fun startFeature() {
+        val fetchProducts = PinkgreenFetchProductsOption(
+            title = "fetchProducts",
+            response = Response.success(
+                Utils.getJsonDataFromAsset(
+                    requireActivity().application,
+                    "products.json"
+                )
+            )
+        )
         MktFeatureInitializer.close()
         val apiLib = PinkgreenApiImpl()
         val apiMock = MockApi(
-            fetchProducts = fetchProductsOption,
+            fetchProducts = fetchProducts,
         )
         val api = when (mode) {
             1 -> apiMock

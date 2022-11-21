@@ -1,5 +1,6 @@
 package br.com.pinkgreen.mobile.main.ui.view.adapters
 
+import android.app.Application
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,9 +10,13 @@ import br.com.pinkgreen.mobile.databinding.PinkgreenApiOptionItemBinding
 import br.com.pinkgreen.mobile.main.MockApiResponse
 import br.com.pinkgreen.mobile.main.ui.vo.PinkgreenApiOption
 import br.com.pinkgreen.mobile.main.ui.vo.PinkgreenFetchProductsOption
+import br.com.pinkgreen.mobile.utils.Utils
 import retrofit2.Response
 
-class PinkgreenApiOptionsAdapter(private val list: List<PinkgreenApiOption>) :
+class PinkgreenApiOptionsAdapter(
+    private val application: Application,
+    private val list: List<PinkgreenApiOption>
+) :
     RecyclerView.Adapter<PinkgreenApiOptionsAdapter.InternshipApiOptionsViewHolder>() {
     inner class InternshipApiOptionsViewHolder(private val binding: PinkgreenApiOptionItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -23,15 +28,18 @@ class PinkgreenApiOptionsAdapter(private val list: List<PinkgreenApiOption>) :
                     R.id.radio_button_success -> {
                         when (item) {
                             is PinkgreenFetchProductsOption -> item.response =
-                                MockApiResponse.MktProducts.fetchProducts
-                            else -> {}
+                                Response.success(
+                                    Utils.getJsonDataFromAsset<MktProductsResponseDTO>(
+                                        application,
+                                        "products.json"
+                                    )
+                                )
                         }
                     }
                     R.id.radio_button_error -> {
                         when (item) {
                             is PinkgreenFetchProductsOption -> item.response =
                                 MockApiResponse.error as Response<MktProductsResponseDTO>
-                            else -> {}
                         }
                     }
                 }
