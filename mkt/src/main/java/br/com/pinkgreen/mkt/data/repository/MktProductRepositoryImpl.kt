@@ -3,7 +3,6 @@ package br.com.pinkgreen.mkt.data.repository
 import br.com.pinkgreen.mkt.data.MktApi
 import br.com.pinkgreen.mkt.data.dto.MktProductResponseDTO
 import br.com.pinkgreen.mkt.commons.extension.flowOf
-import br.com.pinkgreen.mkt.data.dto.MktProductsResponseDTO
 import kotlinx.coroutines.flow.Flow
 
 internal class MktProductRepositoryImpl(private val productMktApi: MktApi) : MktProductRepository {
@@ -11,7 +10,7 @@ internal class MktProductRepositoryImpl(private val productMktApi: MktApi) : Mkt
         productMktApi.fetchProduct(id)
     }
 
-    override fun fetchProducts(): Flow<MktProductsResponseDTO> = flowOf {
+    override fun fetchProducts(): Flow<List<MktProductResponseDTO>> = flowOf {
         productMktApi.fetchProducts()
     }
 }

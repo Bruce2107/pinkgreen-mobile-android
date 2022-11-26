@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="mkt_products_header, mkt_home_navbar, mkt_home_scroll_view"
+        app:constraint_referenced_ids="mkt_products_header, mkt_home_navbar, mkt_product_list"
         tools:visibility="visible" />
 
     <TextView
@@ -29,29 +29,19 @@
         app:layout_constraintStart_toStartOf="@id/mkt_home_vertical_guideline_start"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/mkt_home_scroll_view"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mkt_product_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="56dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/mkt_home_vertical_guideline_end"
         app:layout_constraintStart_toStartOf="@id/mkt_home_vertical_guideline_start"
-        app:layout_constraintTop_toBottomOf="@+id/mkt_products_header">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/mkt_product_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="parent"
-            tools:itemCount="8"
-            tools:layout="@layout/mkt_product_item"
-            tools:listitem="@layout/mkt_product_item" />
-    </androidx.core.widget.NestedScrollView>
+        app:layout_constraintTop_toBottomOf="@+id/mkt_products_header"
+        tools:itemCount="8"
+        tools:layout="@layout/mkt_product_item"
+        tools:listitem="@layout/mkt_product_item" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/mkt_home_vertical_guideline_start"

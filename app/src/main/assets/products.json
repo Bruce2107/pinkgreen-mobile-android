@@ -1,5 +1,4 @@
-{
-  "products": [
+[
     {
       "id": 1,
       "name": "Notebook Aspire 5",
@@ -172,4 +171,3 @@
       ]
     }
   ]
-}

@@ -11,6 +11,7 @@ import br.com.pinkgreen.mkt.init.MktParams
 import br.com.pinkgreen.mobile.main.MockApi
 import br.com.pinkgreen.mobile.main.MockApiResponse
 import br.com.pinkgreen.mobile.lib.PinkgreenApiImpl
+import br.com.pinkgreen.mobile.lib.RetrofitClient
 import br.com.pinkgreen.mobile.main.ui.view.adapters.PinkgreenApiOptionsAdapter
 import br.com.pinkgreen.mobile.main.ui.vo.PinkgreenFetchProductsOption
 import br.com.pinkgreen.mobile.utils.Utils
@@ -68,7 +69,8 @@ class FeatureSettingsFragment : Fragment() {
             )
         )
         MktFeatureInitializer.close()
-        val apiLib = PinkgreenApiImpl()
+        val apiLib = RetrofitClient.getInstance().create(PinkgreenApiImpl::class.java)
+
         val apiMock = MockApi(
             fetchProducts = fetchProducts,
         )

@@ -4,7 +4,7 @@ import android.app.Application
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import br.com.pinkgreen.mkt.data.dto.MktProductsResponseDTO
+import br.com.pinkgreen.mkt.data.dto.MktProductResponseDTO
 import br.com.pinkgreen.mobile.R
 import br.com.pinkgreen.mobile.databinding.PinkgreenApiOptionItemBinding
 import br.com.pinkgreen.mobile.main.MockApiResponse
@@ -23,13 +23,13 @@ class PinkgreenApiOptionsAdapter(
         fun bind(item: PinkgreenApiOption) {
             binding.title.text = item.title
 
-            binding.radioGroup.setOnCheckedChangeListener { group, checkedId ->
+            binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
                 when (checkedId) {
                     R.id.radio_button_success -> {
                         when (item) {
                             is PinkgreenFetchProductsOption -> item.response =
                                 Response.success(
-                                    Utils.getJsonDataFromAsset<MktProductsResponseDTO>(
+                                    Utils.getJsonDataFromAsset<List<MktProductResponseDTO>>(
                                         application,
                                         "products.json"
                                     )
@@ -39,7 +39,7 @@ class PinkgreenApiOptionsAdapter(
                     R.id.radio_button_error -> {
                         when (item) {
                             is PinkgreenFetchProductsOption -> item.response =
-                                MockApiResponse.error as Response<MktProductsResponseDTO>
+                                MockApiResponse.error as Response<List<MktProductResponseDTO>>
                         }
                     }
                 }
