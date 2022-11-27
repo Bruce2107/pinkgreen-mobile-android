@@ -1,5 +1,6 @@
 package br.com.pinkgreen.mkt.ui.view
 
+import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.RecyclerView
 import br.com.pinkgreen.mkt.R
 import br.com.pinkgreen.mkt.databinding.FragmentMktProductsBinding
 import br.com.pinkgreen.mkt.di.CustomKoinComponent
@@ -85,6 +87,17 @@ internal class MktProductsFragment : Fragment(), CustomKoinComponent {
     }
 
     private fun onProductsSuccess(data: MktProductsResponseVO) {
+        binding.mktProductList.addItemDecoration(object : RecyclerView.ItemDecoration() {
+            override fun getItemOffsets(
+                outRect: Rect,
+                view: View,
+                parent: RecyclerView,
+                state: RecyclerView.State
+            ) {
+                super.getItemOffsets(outRect, view, parent, state)
+                outRect.set(20, 12, 20, 12)
+            }
+        })
         binding.mktProductList.adapter =
             MktProductListAdapter(
                 fragment = this,

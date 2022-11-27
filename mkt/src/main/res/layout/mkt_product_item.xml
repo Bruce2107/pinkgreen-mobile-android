@@ -19,11 +19,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Product Name"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/productImage"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Product Name" />
 
     <TextView
         android:id="@+id/productPrice"
@@ -42,9 +42,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="80dp"
         android:layout_marginEnd="8dp"
-        android:text="Comprar agora"
         app:layout_constraintBottom_toBottomOf="@+id/productImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/productImage"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Comprar agora" />
 </androidx.constraintlayout.widget.ConstraintLayout>
