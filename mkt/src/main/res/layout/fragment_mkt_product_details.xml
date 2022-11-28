@@ -6,63 +6,76 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include
+        android:id="@+id/mkt_details_loading"
+        layout="@layout/loading_screen"
+        android:visibility="gone" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/mkt_details_content_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="mkt_details_image, mkt_details_buy, mkt_details_name, mkt_details_price, mkt_details_description"
+        tools:visibility="visible" />
+
     <ImageView
-        android:id="@+id/mktProductDetailsImage"
+        android:id="@+id/mkt_details_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toStartOf="@+id/mktProductDetailsVerticalGuidelineEnd"
-        app:layout_constraintStart_toStartOf="@+id/mktProductDetailsVerticalGuidelineStart"
-        app:layout_constraintTop_toBottomOf="@+id/mktProductDetailsName"
+        app:layout_constraintEnd_toStartOf="@+id/mkt_details_vertical_guideline_end"
+        app:layout_constraintStart_toStartOf="@+id/mkt_details_vertical_guideline_start"
+        app:layout_constraintTop_toBottomOf="@+id/mkt_details_name"
         tools:srcCompat="@tools:sample/avatars" />
 
     <Button
-        android:id="@+id/mktProductDetailsBtnBuy"
+        android:id="@+id/mkt_details_buy"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/mktProductDetailsHorizontalGuidelineEnd"
-        app:layout_constraintEnd_toStartOf="@+id/mktProductDetailsVerticalGuidelineEnd"
-        app:layout_constraintStart_toStartOf="@+id/mktProductDetailsVerticalGuidelineStart"
-        tools:text="@tools:sample/lorem" />
+        app:layout_constraintBottom_toTopOf="@+id/mkt_details_horizontal_guideline_end"
+        app:layout_constraintEnd_toStartOf="@+id/mkt_details_vertical_guideline_end"
+        app:layout_constraintStart_toStartOf="@+id/mkt_details_vertical_guideline_start"
+        android:text="@string/buy" />
 
     <TextView
-        android:id="@+id/mktProductDetailsName"
+        android:id="@+id/mkt_details_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@tools:sample/lorem"
-        app:layout_constraintEnd_toStartOf="@+id/mktProductDetailsVerticalGuidelineEnd"
-        app:layout_constraintStart_toStartOf="@+id/mktProductDetailsVerticalGuidelineStart"
+        app:layout_constraintEnd_toStartOf="@+id/mkt_details_vertical_guideline_end"
+        app:layout_constraintStart_toStartOf="@+id/mkt_details_vertical_guideline_start"
         app:layout_constraintTop_toBottomOf="@+id/mktProductDetailsHorizontalGuidelineStart" />
 
     <TextView
-        android:id="@+id/mktProductDetailsPrice"
+        android:id="@+id/mkt_details_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@tools:sample/lorem"
-        app:layout_constraintEnd_toStartOf="@+id/mktProductDetailsVerticalGuidelineEnd"
-        app:layout_constraintStart_toStartOf="@+id/mktProductDetailsVerticalGuidelineStart"
         android:layout_marginTop="32dp"
-        app:layout_constraintTop_toBottomOf="@+id/mktProductDetailsImage" />
+        android:text="@tools:sample/lorem"
+        app:layout_constraintEnd_toStartOf="@+id/mkt_details_vertical_guideline_end"
+        app:layout_constraintStart_toStartOf="@+id/mkt_details_vertical_guideline_start"
+        app:layout_constraintTop_toBottomOf="@+id/mkt_details_image" />
 
     <TextView
-        android:id="@+id/mktProductDetailsDescription"
-        android:layout_width="363dp"
+        android:id="@+id/mkt_details_description"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@tools:sample/lorem[20]"
-        app:layout_constraintBottom_toTopOf="@+id/mktProductDetailsBtnBuy"
-        app:layout_constraintEnd_toStartOf="@+id/mktProductDetailsVerticalGuidelineEnd"
-        app:layout_constraintStart_toStartOf="@+id/mktProductDetailsVerticalGuidelineStart"
-        app:layout_constraintTop_toBottomOf="@id/mktProductDetailsPrice" />
+        app:layout_constraintBottom_toTopOf="@+id/mkt_details_buy"
+        app:layout_constraintEnd_toStartOf="@+id/mkt_details_vertical_guideline_end"
+        app:layout_constraintStart_toStartOf="@+id/mkt_details_vertical_guideline_start"
+        app:layout_constraintTop_toBottomOf="@id/mkt_details_price" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/mktProductDetailsVerticalGuidelineStart"
+        android:id="@+id/mkt_details_vertical_guideline_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="24dp" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/mktProductDetailsVerticalGuidelineEnd"
+        android:id="@+id/mkt_details_vertical_guideline_end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -76,9 +89,17 @@
         app:layout_constraintGuide_begin="24dp" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/mktProductDetailsHorizontalGuidelineEnd"
+        android:id="@+id/mkt_details_horizontal_guideline_end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="24dp" />
+        app:layout_constraintGuide_end="60dp" />
+
+    <include
+        android:id="@+id/mkt_details_navbar"
+        layout="@layout/navbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mkt_details_name" />
 </androidx.constraintlayout.widget.ConstraintLayout>

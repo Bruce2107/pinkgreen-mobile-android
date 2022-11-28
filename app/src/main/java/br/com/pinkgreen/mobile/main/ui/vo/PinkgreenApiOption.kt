@@ -10,3 +10,8 @@ class PinkgreenFetchProductsOption(
     var response: Response<List<MktProductResponseDTO>>
 ) : PinkgreenApiOption(title)
 
+class PinkgreenFetchProductOption(
+    title: String,
+    var response: Response<MktProductResponseDTO>
+) : PinkgreenApiOption(title)
+

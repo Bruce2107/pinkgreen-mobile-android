@@ -109,7 +109,7 @@ internal class MktProductsFragment : Fragment(), CustomKoinComponent {
     }
 
     private fun fastBuyAction(id: Int) {
-        navigation.navigateFromListToDetails()
+        navigation.navigateFromListToDetails(id)
     }
 
     private fun setupNavbar(activity: FragmentActivity) = with(binding) {

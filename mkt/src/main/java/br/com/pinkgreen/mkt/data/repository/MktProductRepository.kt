@@ -4,6 +4,6 @@ import br.com.pinkgreen.mkt.data.dto.MktProductResponseDTO
 import kotlinx.coroutines.flow.Flow
 
 internal interface MktProductRepository {
-    fun fetchProduct(id: String): Flow<MktProductResponseDTO>
+    fun fetchProduct(id: Int): Flow<MktProductResponseDTO>
     fun fetchProducts(): Flow<List<MktProductResponseDTO>>
 }

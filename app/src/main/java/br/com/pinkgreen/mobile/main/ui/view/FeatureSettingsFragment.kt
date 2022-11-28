@@ -13,6 +13,7 @@ import br.com.pinkgreen.mobile.main.MockApiResponse
 import br.com.pinkgreen.mobile.lib.PinkgreenApiImpl
 import br.com.pinkgreen.mobile.lib.RetrofitClient
 import br.com.pinkgreen.mobile.main.ui.view.adapters.PinkgreenApiOptionsAdapter
+import br.com.pinkgreen.mobile.main.ui.vo.PinkgreenFetchProductOption
 import br.com.pinkgreen.mobile.main.ui.vo.PinkgreenFetchProductsOption
 import br.com.pinkgreen.mobile.utils.Utils
 import retrofit2.Response
@@ -21,15 +22,21 @@ class FeatureSettingsFragment : Fragment() {
     private var _binding: FragmentFeatureSettingsBinding? = null
     private val binding get() = _binding!!
     private var mode: Int = 0
-    private val fetchProductsOption = PinkgreenFetchProductsOption(
+    private var fetchProductsOption = PinkgreenFetchProductsOption(
         title = "fetchProducts",
         response = MockApiResponse.MktProducts.fetchProducts
+    )
+
+    private var fetchProductOption = PinkgreenFetchProductOption(
+        title = "fetchProduct",
+        response = MockApiResponse.MktProducts.fetchProduct
     )
 
 
     private val apiOptions by lazy {
         listOf(
             fetchProductsOption,
+            fetchProductOption
         )
     }
 
@@ -47,6 +54,7 @@ class FeatureSettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupViews()
+        updateMock()
     }
 
     private fun setupViews() {
@@ -58,8 +66,8 @@ class FeatureSettingsFragment : Fragment() {
         }
     }
 
-    private fun startFeature() {
-        val fetchProducts = PinkgreenFetchProductsOption(
+    private fun updateMock() {
+        fetchProductsOption = PinkgreenFetchProductsOption(
             title = "fetchProducts",
             response = Response.success(
                 Utils.getJsonDataFromAsset(
@@ -68,11 +76,25 @@ class FeatureSettingsFragment : Fragment() {
                 )
             )
         )
+
+        fetchProductOption = PinkgreenFetchProductOption(
+            title = "fetchProduct",
+            response = Response.success(
+                Utils.getJsonDataFromAsset(
+                    requireActivity().application,
+                    "product.json"
+                )
+            )
+        )
+    }
+
+    private fun startFeature() {
         MktFeatureInitializer.close()
         val apiLib = RetrofitClient.getInstance().create(PinkgreenApiImpl::class.java)
 
         val apiMock = MockApi(
-            fetchProducts = fetchProducts,
+            fetchProducts = fetchProductsOption,
+            fetchProduct = fetchProductOption
         )
         val api = when (mode) {
             1 -> apiMock

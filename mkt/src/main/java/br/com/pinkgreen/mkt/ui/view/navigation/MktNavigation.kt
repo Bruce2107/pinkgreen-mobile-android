@@ -2,15 +2,16 @@ package br.com.pinkgreen.mkt.ui.view.navigation
 
 import android.content.Context
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import br.com.pinkgreen.mkt.R
 
 import java.lang.ref.WeakReference
 
 internal class MktNavigation(private val navController: WeakReference<NavController>) {
-    fun navigateFromListToDetails() {
+    fun navigateFromListToDetails(id: Int) {
         navController.get()
-            ?.navigate(R.id.action_list_to_product_details)
+            ?.navigate(R.id.action_list_to_product_details, bundleOf("id" to id))
     }
 
     fun navigateToCart(context: Context) {

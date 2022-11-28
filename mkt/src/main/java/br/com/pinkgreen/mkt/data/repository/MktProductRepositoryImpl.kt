@@ -6,7 +6,7 @@ import br.com.pinkgreen.mkt.commons.extension.flowOf
 import kotlinx.coroutines.flow.Flow
 
 internal class MktProductRepositoryImpl(private val productMktApi: MktApi) : MktProductRepository {
-    override fun fetchProduct(id: String): Flow<MktProductResponseDTO> = flowOf {
+    override fun fetchProduct(id: Int): Flow<MktProductResponseDTO> = flowOf {
         productMktApi.fetchProduct(id)
     }
 

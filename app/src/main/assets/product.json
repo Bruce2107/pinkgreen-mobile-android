@@ -1,0 +1,19 @@
+{
+  "id": 1,
+  "name": "Notebook Aspire 5",
+  "price": 3704.05,
+  "active": true,
+  "mainImageUrl": "https://i.imgur.com/PchRPP7.png",
+  "brand": {
+    "id": 1,
+    "name": "Acer",
+    "brandImage": "https://i.imgur.com/6wTcxmU.png"
+  },
+  "categories": [
+    {
+      "id": 1,
+      "name": "Informatica",
+      "image": "https://i.imgur.com/PchRPP7.png"
+    }
+  ]
+}

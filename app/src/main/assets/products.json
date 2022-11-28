@@ -1,173 +1,173 @@
 [
-    {
+  {
+    "id": 1,
+    "name": "Notebook Aspire 5",
+    "price": 3704.05,
+    "active": true,
+    "mainImageUrl": "https://i.imgur.com/PchRPP7.png",
+    "brand": {
       "id": 1,
-      "name": "Notebook Aspire 5",
-      "price": 3704.05,
-      "active": true,
-      "mainImageUrl": "https://i.imgur.com/PchRPP7.png",
-      "brand": {
+      "name": "Acer",
+      "brandImage": "https://i.imgur.com/6wTcxmU.png"
+    },
+    "categories": [
+      {
         "id": 1,
-        "name": "Acer",
-        "brandImage": "https://i.imgur.com/6wTcxmU.png"
-      },
-      "categories": [
-        {
-          "id": 1,
-          "name": "Informatica",
-          "image": "https://i.imgur.com/PchRPP7.png"
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "name": "Galaxy S10e",
-      "price": 2400.0,
-      "active": true,
-      "mainImageUrl": "https://i.imgur.com/dkR4vDn.png",
-      "brand": {
-        "id": 3,
-        "name": "Samsung",
-        "brandImage": "https://i.imgur.com/OkgdSou.png"
-      },
-      "categories": [
-        {
-          "id": 3,
-          "name": "Celulares e smartphones",
-          "image": "https://i.imgur.com/m6VyNEE.png"
-        }
-      ]
-    },
-    {
+        "name": "Informatica",
+        "image": "https://i.imgur.com/PchRPP7.png"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Galaxy S10e",
+    "price": 2400.0,
+    "active": true,
+    "mainImageUrl": "https://i.imgur.com/dkR4vDn.png",
+    "brand": {
       "id": 3,
-      "name": "Xiaomi MI 9",
-      "price": 1400.0,
-      "active": true,
-      "mainImageUrl": "https://i.imgur.com/Bcme7Vy.png",
-      "brand": {
-        "id": 6,
-        "name": "Xiaomi",
-        "brandImage": "https://i.imgur.com/7N2QBR1.png"
-      },
-      "categories": [
-        {
-          "id": 3,
-          "name": "Celulares e smartphones",
-          "image": "https://i.imgur.com/m6VyNEE.png"
-        }
-      ]
+      "name": "Samsung",
+      "brandImage": "https://i.imgur.com/OkgdSou.png"
     },
-    {
-      "id": 4,
-      "name": "TV Samsung 50\"",
-      "price": 3000.0,
-      "active": true,
-      "mainImageUrl": "https://i.imgur.com/QiBNHzb.png",
-      "brand": {
+    "categories": [
+      {
         "id": 3,
-        "name": "Samsung",
-        "brandImage": "https://i.imgur.com/OkgdSou.png"
-      },
-      "categories": [
-        {
-          "id": 2,
-          "name": "Eletrodomésticos",
-          "image": "https://i.imgur.com/Ye8Ecvoo.png"
-        }
-      ]
-    },
-    {
-      "id": 5,
-      "name": "Notebook Samsung Book",
-      "price": 3181.55,
-      "active": true,
-      "mainImageUrl": "https://i.imgur.com/fzo9SWr.png",
-      "brand": {
-        "id": 3,
-        "name": "Samsung",
-        "brandImage": "https://i.imgur.com/OkgdSou.png"
-      },
-      "categories": [
-        {
-          "id": 1,
-          "name": "Informatica",
-          "image": "https://i.imgur.com/PchRPP7.png"
-        }
-      ]
-    },
-    {
+        "name": "Celulares e smartphones",
+        "image": "https://i.imgur.com/m6VyNEE.png"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Xiaomi MI 9",
+    "price": 1400.0,
+    "active": true,
+    "mainImageUrl": "https://i.imgur.com/Bcme7Vy.png",
+    "brand": {
       "id": 6,
-      "name": "Samsung Galaxy A11",
-      "price": 999.0,
-      "active": true,
-      "mainImageUrl": "https://i.imgur.com/b6XTUFP.png",
-      "brand": {
+      "name": "Xiaomi",
+      "brandImage": "https://i.imgur.com/7N2QBR1.png"
+    },
+    "categories": [
+      {
         "id": 3,
-        "name": "Samsung",
-        "brandImage": "https://i.imgur.com/OkgdSou.png"
-      },
-      "categories": [
-        {
-          "id": 3,
-          "name": "Celulares e smartphones",
-          "image": "https://i.imgur.com/m6VyNEE.png"
-        }
-      ]
+        "name": "Celulares e smartphones",
+        "image": "https://i.imgur.com/m6VyNEE.png"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "TV Samsung 50\"",
+    "price": 3000.0,
+    "active": true,
+    "mainImageUrl": "https://i.imgur.com/QiBNHzb.png",
+    "brand": {
+      "id": 3,
+      "name": "Samsung",
+      "brandImage": "https://i.imgur.com/OkgdSou.png"
     },
-    {
-      "id": 7,
-      "name": "iPhone 12 Pro Max",
-      "price": 9495.36,
-      "active": true,
-      "mainImageUrl": "https://i.imgur.com/m6VyNEE.png",
-      "brand": {
+    "categories": [
+      {
         "id": 2,
-        "name": "Apple",
-        "brandImage": "https://i.imgur.com/JdtpxX9.png"
-      },
-      "categories": [
-        {
-          "id": 3,
-          "name": "Celulares e smartphones",
-          "image": "https://i.imgur.com/m6VyNEE.png"
-        }
-      ]
+        "name": "Eletrodomésticos",
+        "image": "https://i.imgur.com/Ye8Ecvoo.png"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Notebook Samsung Book",
+    "price": 3181.55,
+    "active": true,
+    "mainImageUrl": "https://i.imgur.com/fzo9SWr.png",
+    "brand": {
+      "id": 3,
+      "name": "Samsung",
+      "brandImage": "https://i.imgur.com/OkgdSou.png"
     },
-    {
-      "id": 8,
-      "name": "Micro-ondas",
-      "price": 659.0,
-      "active": true,
-      "mainImageUrl": "https://i.imgur.com/Ye8Ecvo.png",
-      "brand": {
-        "id": 4,
-        "name": "Electrolux",
-        "brandImage": "https://i.imgur.com/FNvvjre.png"
-      },
-      "categories": [
-        {
-          "id": 2,
-          "name": "Eletrodomésticos",
-          "image": "https://i.imgur.com/Ye8Ecvoo.png"
-        }
-      ]
+    "categories": [
+      {
+        "id": 1,
+        "name": "Informatica",
+        "image": "https://i.imgur.com/PchRPP7.png"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Samsung Galaxy A11",
+    "price": 999.0,
+    "active": true,
+    "mainImageUrl": "https://i.imgur.com/b6XTUFP.png",
+    "brand": {
+      "id": 3,
+      "name": "Samsung",
+      "brandImage": "https://i.imgur.com/OkgdSou.png"
     },
-    {
-      "id": 9,
-      "name": "Fogão de Piso 4 Bocas",
-      "price": 433.52,
-      "active": true,
-      "mainImageUrl": "https://i.imgur.com/2dmMfQp.png",
-      "brand": {
-        "id": 5,
-        "name": "Esmaltec",
-        "brandImage": "https://i.imgur.com/xrv55JQ.png"
-      },
-      "categories": [
-        {
-          "id": 2,
-          "name": "Eletrodomésticos",
-          "image": "https://i.imgur.com/Ye8Ecvoo.png"
-        }
-      ]
-    }
-  ]
+    "categories": [
+      {
+        "id": 3,
+        "name": "Celulares e smartphones",
+        "image": "https://i.imgur.com/m6VyNEE.png"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "iPhone 12 Pro Max",
+    "price": 9495.36,
+    "active": true,
+    "mainImageUrl": "https://i.imgur.com/m6VyNEE.png",
+    "brand": {
+      "id": 2,
+      "name": "Apple",
+      "brandImage": "https://i.imgur.com/JdtpxX9.png"
+    },
+    "categories": [
+      {
+        "id": 3,
+        "name": "Celulares e smartphones",
+        "image": "https://i.imgur.com/m6VyNEE.png"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Micro-ondas",
+    "price": 659.0,
+    "active": true,
+    "mainImageUrl": "https://i.imgur.com/Ye8Ecvo.png",
+    "brand": {
+      "id": 4,
+      "name": "Electrolux",
+      "brandImage": "https://i.imgur.com/FNvvjre.png"
+    },
+    "categories": [
+      {
+        "id": 2,
+        "name": "Eletrodomésticos",
+        "image": "https://i.imgur.com/Ye8Ecvoo.png"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Fogão de Piso 4 Bocas",
+    "price": 433.52,
+    "active": true,
+    "mainImageUrl": "https://i.imgur.com/2dmMfQp.png",
+    "brand": {
+      "id": 5,
+      "name": "Esmaltec",
+      "brandImage": "https://i.imgur.com/xrv55JQ.png"
+    },
+    "categories": [
+      {
+        "id": 2,
+        "name": "Eletrodomésticos",
+        "image": "https://i.imgur.com/Ye8Ecvoo.png"
+      }
+    ]
+  }
+]

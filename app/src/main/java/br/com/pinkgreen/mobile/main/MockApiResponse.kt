@@ -10,7 +10,6 @@ object MockApiResponse {
     object MktProducts {
         val fetchProducts: Response<List<MktProductResponseDTO>> by lazy {
             Response.success(
-
                 listOf(
                     MktProductResponseDTO(
                         id = 1,
@@ -148,6 +147,30 @@ object MockApiResponse {
                 )
             )
 
+        }
+
+        val fetchProduct: Response<MktProductResponseDTO> by lazy {
+            Response.success(
+                MktProductResponseDTO(
+                    id = 1,
+                    name = "Notebook Aspire 5",
+                    price = 3704.05,
+                    active = true,
+                    mainImageUrl = "https://i.imgur.com/PchRPP7.png",
+                    brand = MktBrandResponseDTO(
+                        id = 1,
+                        name = "Acer",
+                        brandImage = "https://i.imgur.com/6wTcxmU.png"
+                    ),
+                    categories = listOf(
+                        MktCategoryResponseDTO(
+                            id = 1,
+                            name = "Informatica",
+                            image = "https://i.imgur.com/PchRPP7.png"
+                        )
+                    )
+                )
+            )
         }
     }
 

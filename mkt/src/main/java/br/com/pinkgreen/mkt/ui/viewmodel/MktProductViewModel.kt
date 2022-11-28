@@ -19,7 +19,7 @@ internal class MktProductViewModel(
     private val _product = MutableStateFlow<ViewState<MktProductResponseVO>?>(null)
     val product: StateFlow<ViewState<MktProductResponseVO>?> = _product
 
-    fun fetchProduct(id: String) = viewModelScope.launch {
+    fun fetchProduct(id: Int) = viewModelScope.launch {
         repository.fetchProduct(id).map { converter.convert(it) }.collectViewState(_product)
     }
 }

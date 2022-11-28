@@ -5,7 +5,7 @@ import retrofit2.Response
 
 interface MktApi {
 
-    suspend fun fetchProduct(id: String): Response<MktProductResponseDTO> {
+    suspend fun fetchProduct(id: Int): Response<MktProductResponseDTO> {
         throw NotImplementedError("fetchProduct not implemented")
     }
 

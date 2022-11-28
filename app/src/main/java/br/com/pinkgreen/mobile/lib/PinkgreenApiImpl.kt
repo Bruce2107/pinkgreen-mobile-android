@@ -11,5 +11,5 @@ interface PinkgreenApiImpl : MktApi {
     override suspend fun fetchProducts(): Response<List<MktProductResponseDTO>>
 
     @GET("/product/{id}")
-    override suspend fun fetchProduct(@Path("id") id: String): Response<MktProductResponseDTO>
+    override suspend fun fetchProduct(@Path("id") id: Int): Response<MktProductResponseDTO>
 }

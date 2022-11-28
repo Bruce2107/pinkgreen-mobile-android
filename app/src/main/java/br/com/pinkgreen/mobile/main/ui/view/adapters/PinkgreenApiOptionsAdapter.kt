@@ -9,6 +9,7 @@ import br.com.pinkgreen.mobile.R
 import br.com.pinkgreen.mobile.databinding.PinkgreenApiOptionItemBinding
 import br.com.pinkgreen.mobile.main.MockApiResponse
 import br.com.pinkgreen.mobile.main.ui.vo.PinkgreenApiOption
+import br.com.pinkgreen.mobile.main.ui.vo.PinkgreenFetchProductOption
 import br.com.pinkgreen.mobile.main.ui.vo.PinkgreenFetchProductsOption
 import br.com.pinkgreen.mobile.utils.Utils
 import retrofit2.Response
@@ -34,12 +35,21 @@ class PinkgreenApiOptionsAdapter(
                                         "products.json"
                                     )
                                 )
+                            is PinkgreenFetchProductOption -> item.response =
+                                Response.success(
+                                    Utils.getJsonDataFromAsset<MktProductResponseDTO>(
+                                        application,
+                                        "product.josn"
+                                    )
+                                )
                         }
                     }
                     R.id.radio_button_error -> {
                         when (item) {
                             is PinkgreenFetchProductsOption -> item.response =
                                 MockApiResponse.error as Response<List<MktProductResponseDTO>>
+                            is PinkgreenFetchProductOption -> item.response =
+                                MockApiResponse.error as Response<MktProductResponseDTO>
                         }
                     }
                 }
