@@ -14,8 +14,12 @@ internal class MktNavigation(private val navController: WeakReference<NavControl
             ?.navigate(R.id.action_list_to_product_details, bundleOf("id" to id))
     }
 
-    fun navigateToCart(context: Context) {
-        Toast.makeText(context, "Carrinho", Toast.LENGTH_SHORT).show()
+    fun navigateToHome(){
+        navController.get()?.navigate(R.id.action_any_to_home)
+    }
+
+    fun navigateToCheckout() {
+        navController.get()?.navigate(R.id.action_any_to_checkout)
     }
 
     fun navigateToFavourites(context: Context) {

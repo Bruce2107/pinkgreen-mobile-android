@@ -116,7 +116,7 @@ internal class MktProductsFragment : Fragment(), CustomKoinComponent {
         mktHomeNavbar.navbar.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.action_home -> viewModel.fetchProducts()
-                R.id.action_cart -> navigation.navigateToCart(activity)
+                R.id.action_cart -> navigation.navigateToCheckout()
                 R.id.action_favorite -> navigation.navigateToFavourites(activity)
                 R.id.action_settings -> navigation.navigateToSettings(activity)
                 else -> viewModel.fetchProducts()

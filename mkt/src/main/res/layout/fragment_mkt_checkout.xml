@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/mkt_checkout_loading"
+        layout="@layout/loading_screen"
+        android:visibility="gone" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/mkt_checkout_content_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="mkt_checkout_navbar, mkt_checkout_title, mkt_checkout_scroll_view"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/mkt_checkout_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/cart"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/mkt_checkout_vertical_guideline_end"
+        app:layout_constraintStart_toStartOf="@+id/mkt_checkout_vertical_guideline_start"
+        app:layout_constraintTop_toBottomOf="@+id/mkt_product_checkout_horizontal_guideline_start" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/mkt_checkout_scroll_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="56dp"
+        app:layout_constraintBottom_toBottomOf="@id/mkt_checkout_navbar"
+        app:layout_constraintEnd_toStartOf="@id/mkt_checkout_vertical_guideline_end"
+        app:layout_constraintStart_toEndOf="@id/mkt_checkout_vertical_guideline_start"
+        app:layout_constraintTop_toBottomOf="@+id/mkt_checkout_title">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mkt_checkout_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:itemCount="3"
+                tools:layout="@layout/mkt_product_item"
+                tools:listitem="@layout/mkt_product_item" />
+
+            <TextView
+                android:id="@+id/mkt_checkout_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mkt_checkout_list"
+                tools:text="@string/price_template" />
+
+            <Button
+                android:id="@+id/mkt_checkout_buy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/btnBuy"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mkt_checkout_total"
+                app:layout_constraintBottom_toBottomOf="parent">
+            </Button>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/mkt_checkout_vertical_guideline_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="24dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/mkt_checkout_vertical_guideline_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="24dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/mkt_product_checkout_horizontal_guideline_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="24dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/mkt_checkout_horizontal_guideline_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="60dp" />
+
+    <include
+        android:id="@+id/mkt_checkout_navbar"
+        layout="@layout/navbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mkt_checkout_title" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

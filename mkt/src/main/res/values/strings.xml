@@ -5,4 +5,6 @@
     <string name="emailHint">name@host.com</string>
     <string name="price_template">R$ %1$.2f</string>
     <string name="buy">Comprar</string>
+    <string name="cart">Carrinho</string>
+    <string name="btnBuy">Finalizar compra</string>
 </resources>

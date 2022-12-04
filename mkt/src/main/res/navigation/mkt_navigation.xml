@@ -12,10 +12,30 @@
         <action
             android:id="@+id/action_list_to_product_details"
             app:destination="@id/mktProductDetailsFragment" />
+        <action
+            android:id="@+id/action_any_to_checkout"
+            app:destination="@id/mktCheckoutFragment" />
     </fragment>
     <fragment
         android:id="@+id/mktProductDetailsFragment"
         android:name="br.com.pinkgreen.mkt.ui.view.MktProductDetailsFragment"
         android:label="MktProductDetailsFragment"
-        tools:layout="@layout/fragment_mkt_product_details" />
+        tools:layout="@layout/fragment_mkt_product_details">
+        <action
+            android:id="@+id/action_any_to_home"
+            app:destination="@id/mktProductsFragment" />
+        <action
+            android:id="@id/action_any_to_checkout"
+            app:destination="@id/mktCheckoutFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mktCheckoutFragment"
+        android:name="br.com.pinkgreen.mkt.ui.view.MktCheckoutFragment"
+        android:label="MktProductDetailsFragment"
+        tools:layout="@layout/fragment_mkt_checkout">
+        <action
+            android:id="@id/action_any_to_home"
+            app:destination="@id/mktProductsFragment" />
+    </fragment>
 </navigation>
