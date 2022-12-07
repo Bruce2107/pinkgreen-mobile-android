@@ -3,7 +3,9 @@
 
     <color name="primary">#FF1493</color>
     <color name="primary_variant">#FF69B4</color>
-    <color name="background">#FFC0CB</color>
+    <color name="background">#ececec</color>
+    <color name="text">#3b3b3b</color>
+<!--    <color name="background">#FFC0CB</color>-->
     <color name="secondary">#98FB98</color>
     <color name="secondary_variant">#00FF7F</color>
     <color name="purple_200">#FFBB86FC</color>
