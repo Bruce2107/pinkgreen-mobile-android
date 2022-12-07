@@ -14,6 +14,11 @@ internal class MktNavigation(private val navController: WeakReference<NavControl
             ?.navigate(R.id.action_list_to_product_details, bundleOf("id" to id))
     }
 
+    fun navigateFromCheckoutToDetails(id: Int) {
+        navController.get()
+            ?.navigate(R.id.action_checkout_to_product_details, bundleOf("id" to id))
+    }
+
     fun navigateToHome(){
         navController.get()?.navigate(R.id.action_any_to_home)
     }

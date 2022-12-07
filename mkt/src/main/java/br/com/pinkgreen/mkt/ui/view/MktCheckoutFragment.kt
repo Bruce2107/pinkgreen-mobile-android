@@ -103,8 +103,13 @@ internal class MktCheckoutFragment : Fragment(), CustomKoinComponent {
             updateTotal(cart)
 //            mktCheckoutList.adapter = adapter
             mktCheckoutList.adapter = MktCheckoutAdapter(
-                this@MktCheckoutFragment, cart, MktCheckoutAdapter.OnClickListener { item, pos ->
+                fragment = this@MktCheckoutFragment,
+                products = cart,
+                onClickListener = MktCheckoutAdapter.OnClickListener { item, pos ->
                     removeProduct(item, pos)
+                },
+                onCardClickListener = MktCheckoutAdapter.OnClickListener { item, _ ->
+                    navigation.navigateFromCheckoutToDetails(item.id)
                 }
             )
             mktCheckoutBuy.setOnClickListener {

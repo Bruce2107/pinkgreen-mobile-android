@@ -12,7 +12,8 @@ import coil.load
 internal class MktCheckoutAdapter(
     private val fragment: Fragment,
     private val products: List<MktProductResponseVO>,
-    private val onClickListener: OnClickListener
+    private val onClickListener: OnClickListener,
+    private val onCardClickListener: OnClickListener,
 ) : RecyclerView.Adapter<MktCheckoutAdapter.ProductListViewHolder>() {
     inner class ProductListViewHolder(private val binding: MktProductItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -27,6 +28,10 @@ internal class MktCheckoutAdapter(
             binding.productName.text = item.name
             binding.productPrice.text =
                 fragment.getString(R.string.price_template, item.price)
+
+            binding.productCard.setOnClickListener {
+                onCardClickListener.onClick(item, this.adapterPosition)
+            }
 
             binding.productRemoveBtn.setOnClickListener {
                 onClickListener.onClick(item, this.adapterPosition)
