@@ -12,15 +12,17 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import br.com.pinkgreen.mkt.R
+import br.com.pinkgreen.mkt.database.MktDBQueries
 import br.com.pinkgreen.mkt.databinding.FragmentMktCheckoutBinding
 import br.com.pinkgreen.mkt.di.CustomKoinComponent
 import br.com.pinkgreen.mkt.ui.components.error.ErrorLauncherParams
 import br.com.pinkgreen.mkt.ui.view.adpaters.MktCheckoutAdapter
 import br.com.pinkgreen.mkt.ui.view.navigation.MktNavigation
-import br.com.pinkgreen.mkt.ui.viewmodel.MktProductsViewModel
+import br.com.pinkgreen.mkt.ui.viewmodel.MktCheckoutViewModel
 import br.com.pinkgreen.mkt.ui.viewstate.ErrorType
 import br.com.pinkgreen.mkt.ui.viewstate.ViewState
 import br.com.pinkgreen.mkt.ui.viewstate.collectIfNotNull
+import br.com.pinkgreen.mkt.ui.vo.MktProductResponseVO
 import br.com.pinkgreen.mkt.ui.vo.MktProductsResponseVO
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -33,9 +35,14 @@ internal class MktCheckoutFragment : Fragment(), CustomKoinComponent {
     private var _binding: FragmentMktCheckoutBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: MktProductsViewModel by viewModel()
+    private val viewModel: MktCheckoutViewModel by viewModel()
     private val navigation: MktNavigation by inject { parametersOf(this) }
+    private val dbQueries: MktDBQueries by inject()
+
     private var totalCost by Delegates.notNull<Double>()
+
+    private var cart: MutableList<MktProductResponseVO> = mutableListOf()
+//    private val adapter = MktCheckoutAdapter(this, cart)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,6 +59,7 @@ internal class MktCheckoutFragment : Fragment(), CustomKoinComponent {
         setupObservers()
         setupVisibility()
         setupNavbar(requireActivity())
+//        setupSwipe()
     }
 
     private fun setupObservers() {
@@ -88,15 +96,17 @@ internal class MktCheckoutFragment : Fragment(), CustomKoinComponent {
 
     private fun onProductsSuccess(data: MktProductsResponseVO) {
         with(binding) {
-            totalCost = data.products.fold(0.0) { acc, item -> acc + item.price}
+            for (product in data.products) {
+                cart.add(product)
+            }
 
-            mktCheckoutTotal.text = getString(R.string.price_template, totalCost)
+            updateTotal(cart)
+//            mktCheckoutList.adapter = adapter
             mktCheckoutList.adapter = MktCheckoutAdapter(
-                this@MktCheckoutFragment,
-                data.products,
-                MktCheckoutAdapter.OnClickListener {
-                    Toast.makeText(requireContext(), "Removido", Toast.LENGTH_SHORT).show()
-                })
+                this@MktCheckoutFragment, cart, MktCheckoutAdapter.OnClickListener { item, pos ->
+                    removeProduct(item, pos)
+                }
+            )
             mktCheckoutBuy.setOnClickListener {
                 Toast.makeText(context, "Compra realizada", Toast.LENGTH_SHORT).show()
             }
@@ -130,4 +140,49 @@ internal class MktCheckoutFragment : Fragment(), CustomKoinComponent {
                 }
             }
         }
+
+    private fun updateTotal(list: List<MktProductResponseVO>) {
+        totalCost = list.fold(0.0) { acc, item -> acc + item.price }
+        binding.mktCheckoutTotal.text = getString(R.string.price_template, totalCost)
+    }
+
+//    private fun setupSwipe() {
+//        val itemTouchHelper = object : ItemTouchHelper.Callback() {
+//            override fun getMovementFlags(
+//                recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder
+//            ): Int {
+//                return makeMovementFlags(
+//                    ItemTouchHelper.ACTION_STATE_IDLE, ItemTouchHelper.START or ItemTouchHelper.END
+//                )
+//            }
+//
+//            override fun onMove(
+//                recyclerView: RecyclerView,
+//                viewHolder: RecyclerView.ViewHolder,
+//                target: RecyclerView.ViewHolder
+//            ): Boolean {
+//                return false
+//            }
+//
+//            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+//                removeProduct(viewHolder)
+//            }
+//        }
+//        ItemTouchHelper(itemTouchHelper).attachToRecyclerView(binding.mktCheckoutList)
+//    }
+
+    private fun removeProduct(productResponseVO: MktProductResponseVO, pos: Int) {
+        dbQueries.deleteProduct(productResponseVO.id)
+        cart.removeAt(pos)
+        updateTotal(cart)
+        Toast.makeText(requireContext(), "Removido", Toast.LENGTH_SHORT).show()
+    }
+
+//    private fun removeProduct(viewHolder: RecyclerView.ViewHolder) {
+//        val product = cart[viewHolder.adapterPosition]
+//        dbQueries.deleteProduct(product.id)
+//        cart.removeAt(viewHolder.adapterPosition)
+//        adapter.notifyItemRemoved(viewHolder.adapterPosition)
+//        Toast.makeText(requireContext(), "Removido", Toast.LENGTH_SHORT).show()
+//    }
 }

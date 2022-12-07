@@ -4,9 +4,12 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import br.com.pinkgreen.mkt.data.repository.MktProductRepository
 import br.com.pinkgreen.mkt.data.repository.MktProductRepositoryImpl
+import br.com.pinkgreen.mkt.database.MktDBHelper
+import br.com.pinkgreen.mkt.database.MktDBQueries
 import br.com.pinkgreen.mkt.domain.converter.MktProductConverter
 import br.com.pinkgreen.mkt.domain.converter.MktProductsConverter
 import br.com.pinkgreen.mkt.ui.view.navigation.MktNavigation
+import br.com.pinkgreen.mkt.ui.viewmodel.MktCheckoutViewModel
 import br.com.pinkgreen.mkt.ui.viewmodel.MktProductViewModel
 import br.com.pinkgreen.mkt.ui.viewmodel.MktProductsViewModel
 
@@ -30,6 +33,14 @@ val mktModule = module {
         MktNavigation(WeakReference(fragment.findNavController()))
     }
 
+    factory {
+        MktDBHelper(get())
+    }
+
+    factory {
+        MktDBQueries(get())
+    }
+
 
     viewModel {
         MktProductsViewModel(get(), get())
@@ -37,6 +48,10 @@ val mktModule = module {
 
     viewModel {
         MktProductViewModel(get(), get())
+    }
+
+    viewModel {
+        MktCheckoutViewModel(get(), get())
     }
 
 }

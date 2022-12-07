@@ -12,6 +12,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import br.com.pinkgreen.mkt.R
+import br.com.pinkgreen.mkt.database.MktDBHelper
+import br.com.pinkgreen.mkt.database.MktDBQueries
 import br.com.pinkgreen.mkt.databinding.FragmentMktProductDetailsBinding
 import br.com.pinkgreen.mkt.di.CustomKoinComponent
 import br.com.pinkgreen.mkt.ui.components.error.ErrorLauncherParams
@@ -35,6 +37,8 @@ internal class MktProductDetailsFragment : Fragment(), CustomKoinComponent {
 
     private val viewModel: MktProductViewModel by viewModel()
     private val navigation: MktNavigation by inject { parametersOf(this) }
+    private val dbHelper: MktDBHelper by inject()
+
     private var productId by Delegates.notNull<Int>()
 
     override fun onCreateView(
@@ -100,7 +104,7 @@ internal class MktProductDetailsFragment : Fragment(), CustomKoinComponent {
                 contentDescription = data.name
             }
             mktDetailsBuy.setOnClickListener {
-                Toast.makeText(context, "Adicionado ao carrinho", Toast.LENGTH_SHORT).show()
+                addToCart(data)
             }
         }
         setupVisibility(content = true)
@@ -133,5 +137,14 @@ internal class MktProductDetailsFragment : Fragment(), CustomKoinComponent {
                 }
             }
         }
+
+    private fun addToCart(productResponseVO: MktProductResponseVO) {
+        val addResult = MktDBQueries(dbHelper).addProduct(productResponseVO)
+        if (addResult.toInt() != -1) {
+            Toast.makeText(context, "Adicionado ao carrinho", Toast.LENGTH_SHORT).show()
+            return
+        }
+        Toast.makeText(context, "Erro ao carrinho", Toast.LENGTH_SHORT).show()
+    }
 
 }

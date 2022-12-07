@@ -12,6 +12,9 @@ internal class MktProductsConverter {
     fun convert(dto: List<MktProductResponseDTO>) =
         MktProductsResponseVO(products = dto.convert())
 
+    fun convertDB(db: List<MktProductResponseVO>) =
+        MktProductsResponseVO(products = db.convertDB())
+
     private fun List<MktProductResponseDTO>.convert() = map {
         MktProductResponseVO(
             name = it.name,
@@ -31,4 +34,17 @@ internal class MktProductsConverter {
     private fun List<MktCategoryResponseDTO>.convertCategory() = map {
         MktCategoryResponseVO(name = it.name, id = it.id, image = it.image)
     }
+
+    private fun List<MktProductResponseVO>.convertDB() = map {
+        MktProductResponseVO(
+            name = it.name,
+            price = it.price,
+            id = it.id,
+            active = null,
+            mainImage = it.mainImage,
+            categories = null,
+            brand = null
+        )
+    }
+
 }

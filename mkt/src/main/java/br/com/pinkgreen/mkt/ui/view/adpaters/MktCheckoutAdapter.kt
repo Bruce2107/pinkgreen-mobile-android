@@ -27,10 +27,11 @@ internal class MktCheckoutAdapter(
             binding.productName.text = item.name
             binding.productPrice.text =
                 fragment.getString(R.string.price_template, item.price)
-            binding.productRemoveBtn.setOnClickListener {
-                onClickListener.onClick(item)
-            }
 
+            binding.productRemoveBtn.setOnClickListener {
+                onClickListener.onClick(item, this.adapterPosition)
+                this@MktCheckoutAdapter.notifyItemRemoved(this.adapterPosition)
+            }
         }
     }
 
@@ -47,7 +48,7 @@ internal class MktCheckoutAdapter(
 
     override fun getItemCount(): Int = products.size
 
-    class OnClickListener(val clickListener: (item: MktProductResponseVO) -> Unit) {
-        fun onClick(item: MktProductResponseVO) = clickListener(item)
+    class OnClickListener(val clickListener: (item: MktProductResponseVO, pos: Int) -> Unit) {
+        fun onClick(item: MktProductResponseVO, pos: Int) = clickListener(item, pos)
     }
 }

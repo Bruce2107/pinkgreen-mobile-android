@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="mkt_checkout_navbar, mkt_checkout_title, mkt_checkout_scroll_view"
+        app:constraint_referenced_ids="mkt_checkout_navbar, mkt_checkout_title, mkt_checkout_list, mkt_checkout_total, mkt_checkout_buy"
         tools:visibility="visible" />
 
     <TextView
@@ -28,60 +28,61 @@
         app:layout_constraintStart_toStartOf="@+id/mkt_checkout_vertical_guideline_start"
         app:layout_constraintTop_toBottomOf="@+id/mkt_product_checkout_horizontal_guideline_start" />
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/mkt_checkout_scroll_view"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="56dp"
-        app:layout_constraintBottom_toBottomOf="@id/mkt_checkout_navbar"
-        app:layout_constraintEnd_toStartOf="@id/mkt_checkout_vertical_guideline_end"
-        app:layout_constraintStart_toEndOf="@id/mkt_checkout_vertical_guideline_start"
-        app:layout_constraintTop_toBottomOf="@+id/mkt_checkout_title">
+<!--    <androidx.core.widget.NestedScrollView-->
+<!--        android:id="@+id/mkt_checkout_scroll_view"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:layout_constraintEnd_toStartOf="@id/mkt_checkout_vertical_guideline_end"-->
+<!--        app:layout_constraintStart_toEndOf="@id/mkt_checkout_vertical_guideline_start"-->
+<!--        app:layout_constraintBottom_toBottomOf="@id/mkt_checkout_horizontal_guideline_section_fixed"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/mkt_checkout_title">-->
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent">-->
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/mkt_checkout_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 tools:itemCount="3"
                 tools:layout="@layout/mkt_product_item"
-                tools:listitem="@layout/mkt_product_item" />
+                tools:listitem="@layout/mkt_product_item"
+                app:layout_constraintEnd_toStartOf="@id/mkt_checkout_vertical_guideline_end"
+                app:layout_constraintStart_toEndOf="@id/mkt_checkout_vertical_guideline_start"
+                app:layout_constraintBottom_toBottomOf="@id/mkt_checkout_horizontal_guideline_section_fixed"
+                app:layout_constraintTop_toBottomOf="@+id/mkt_checkout_title"/>
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--    </androidx.core.widget.NestedScrollView>-->
 
-            <TextView
-                android:id="@+id/mkt_checkout_total"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:textAlignment="center"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/mkt_checkout_list"
-                tools:text="@string/price_template" />
+    <TextView
+        android:id="@+id/mkt_checkout_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/mkt_checkout_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/mkt_checkout_vertical_guideline_end"
+        app:layout_constraintBottom_toTopOf="@id/mkt_checkout_buy"
+        tools:text="@string/price_template" />
 
-            <Button
-                android:id="@+id/mkt_checkout_buy"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="@string/btnBuy"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/mkt_checkout_total"
-                app:layout_constraintBottom_toBottomOf="parent">
-            </Button>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    </androidx.core.widget.NestedScrollView>
-
+    <Button
+        android:id="@+id/mkt_checkout_buy"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/btnBuy"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/mkt_checkout_vertical_guideline_end"
+        app:layout_constraintStart_toStartOf="@+id/mkt_checkout_vertical_guideline_start"
+        app:layout_constraintBottom_toTopOf="@id/mkt_checkout_horizontal_guideline_end"
+        />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/mkt_checkout_vertical_guideline_start"
@@ -110,6 +111,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_end="60dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/mkt_checkout_horizontal_guideline_section_fixed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="164dp" />
 
     <include
         android:id="@+id/mkt_checkout_navbar"
