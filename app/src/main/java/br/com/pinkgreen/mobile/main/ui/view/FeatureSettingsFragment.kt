@@ -54,7 +54,7 @@ class FeatureSettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupViews()
-        updateMock()
+        updateMock() // permite erro
     }
 
     private fun setupViews() {

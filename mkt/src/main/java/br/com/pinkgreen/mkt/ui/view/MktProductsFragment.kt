@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.pinkgreen.mkt.R
 import br.com.pinkgreen.mkt.databinding.FragmentMktProductsBinding
 import br.com.pinkgreen.mkt.di.CustomKoinComponent
-import br.com.pinkgreen.mkt.ui.components.error.ErrorLauncherParams
 import br.com.pinkgreen.mkt.ui.view.adpaters.MktProductListAdapter
 import br.com.pinkgreen.mkt.ui.view.navigation.MktNavigation
 import br.com.pinkgreen.mkt.ui.viewmodel.MktProductsViewModel
@@ -27,7 +26,6 @@ import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
-import java.lang.ref.WeakReference
 
 internal class MktProductsFragment : Fragment(), CustomKoinComponent {
     private var _binding: FragmentMktProductsBinding? = null
@@ -71,11 +69,10 @@ internal class MktProductsFragment : Fragment(), CustomKoinComponent {
     }
 
     private fun onError(errorType: ErrorType, action: () -> (Unit)) {
-        val errorLauncherParams = ErrorLauncherParams(
-            fragmentActivity = WeakReference(this),
-            onDismissClickListener = { requireActivity().finish() },
-            onPrimaryButtonClickListener = action
-        )
+        setupVisibility(error = true)
+        binding.mktErrorScreen.mktErrorTryAgain.setOnClickListener {
+            action()
+        }
     }
 
     private fun onProductsError(errorType: ErrorType) {
@@ -125,10 +122,11 @@ internal class MktProductsFragment : Fragment(), CustomKoinComponent {
         }
     }
 
-    private fun setupVisibility(loading: Boolean = false, content: Boolean = false) =
+    private fun setupVisibility(loading: Boolean = false, content: Boolean = false, error: Boolean = false) =
         with(binding) {
             mktHomeLoading.root.isVisible = loading
             mktHomeContentGroup.isVisible = content
+            mktErrorScreen.root.isVisible = error
             if (loading) {
                 root.post {
                     mktHomeLoading.root.announceForAccessibility(

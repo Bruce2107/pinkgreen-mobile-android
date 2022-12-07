@@ -2,14 +2,19 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/background"
     android:id="@+id/mktDetailsProduct"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background">
 
     <include
         android:id="@+id/mkt_details_loading"
         layout="@layout/loading_screen"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/mkt_error_screen"
+        layout="@layout/fragment_error_screen"
         android:visibility="gone" />
 
     <androidx.constraintlayout.widget.Group
@@ -35,21 +40,21 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/primary"
+        android:text="@string/buy"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/mkt_details_horizontal_guideline_end"
         app:layout_constraintEnd_toStartOf="@+id/mkt_details_vertical_guideline_end"
-        app:layout_constraintStart_toStartOf="@+id/mkt_details_vertical_guideline_start"
-        android:text="@string/buy" />
+        app:layout_constraintStart_toStartOf="@+id/mkt_details_vertical_guideline_start" />
 
     <TextView
         android:id="@+id/mkt_details_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/text"
-        android:text="@tools:sample/lorem"
-        android:textStyle="bold"
         android:gravity="center"
+        android:text="@tools:sample/lorem"
+        android:textColor="@color/text"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/mkt_details_vertical_guideline_end"
         app:layout_constraintStart_toStartOf="@+id/mkt_details_vertical_guideline_start"
         app:layout_constraintTop_toBottomOf="@+id/mktProductDetailsHorizontalGuidelineStart" />
@@ -58,9 +63,9 @@
         android:id="@+id/mkt_details_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/text"
         android:layout_marginTop="32dp"
         android:text="@tools:sample/lorem"
+        android:textColor="@color/text"
         app:layout_constraintEnd_toStartOf="@+id/mkt_details_vertical_guideline_end"
         app:layout_constraintStart_toStartOf="@+id/mkt_details_vertical_guideline_start"
         app:layout_constraintTop_toBottomOf="@+id/mkt_details_image" />
@@ -69,8 +74,8 @@
         android:id="@+id/mkt_details_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/text"
         android:text="@tools:sample/lorem[20]"
+        android:textColor="@color/text"
         app:layout_constraintBottom_toTopOf="@+id/mkt_details_buy"
         app:layout_constraintEnd_toStartOf="@+id/mkt_details_vertical_guideline_end"
         app:layout_constraintStart_toStartOf="@+id/mkt_details_vertical_guideline_start"

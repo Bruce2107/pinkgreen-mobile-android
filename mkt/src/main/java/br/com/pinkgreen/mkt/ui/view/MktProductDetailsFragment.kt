@@ -16,7 +16,6 @@ import br.com.pinkgreen.mkt.database.MktDBHelper
 import br.com.pinkgreen.mkt.database.MktDBQueries
 import br.com.pinkgreen.mkt.databinding.FragmentMktProductDetailsBinding
 import br.com.pinkgreen.mkt.di.CustomKoinComponent
-import br.com.pinkgreen.mkt.ui.components.error.ErrorLauncherParams
 import br.com.pinkgreen.mkt.ui.view.navigation.MktNavigation
 import br.com.pinkgreen.mkt.ui.viewmodel.MktProductViewModel
 import br.com.pinkgreen.mkt.ui.viewstate.ErrorType
@@ -28,7 +27,6 @@ import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
-import java.lang.ref.WeakReference
 import kotlin.properties.Delegates
 
 internal class MktProductDetailsFragment : Fragment(), CustomKoinComponent {
@@ -76,11 +74,10 @@ internal class MktProductDetailsFragment : Fragment(), CustomKoinComponent {
     }
 
     private fun onError(errorType: ErrorType, action: () -> (Unit)) {
-        val errorLauncherParams = ErrorLauncherParams(
-            fragmentActivity = WeakReference(this),
-            onDismissClickListener = { requireActivity().finish() },
-            onPrimaryButtonClickListener = action
-        )
+        setupVisibility(error = true)
+        binding.mktErrorScreen.mktErrorTryAgain.setOnClickListener {
+            action()
+        }
     }
 
     private fun onProductsError(errorType: ErrorType) {
@@ -123,10 +120,15 @@ internal class MktProductDetailsFragment : Fragment(), CustomKoinComponent {
         }
     }
 
-    private fun setupVisibility(loading: Boolean = false, content: Boolean = false) =
+    private fun setupVisibility(
+        loading: Boolean = false,
+        content: Boolean = false,
+        error: Boolean = false
+    ) =
         with(binding) {
             mktDetailsLoading.root.isVisible = loading
             mktDetailsContentGroup.isVisible = content
+            mktErrorScreen.root.isVisible = error
             if (loading) {
                 root.post {
                     mktDetailsLoading.root.announceForAccessibility(
