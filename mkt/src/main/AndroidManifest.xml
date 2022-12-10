@@ -5,6 +5,6 @@
         <activity
             android:name="br.com.pinkgreen.mkt.ui.view.MktActivity"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat" />
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
     </application>
 </manifest>
