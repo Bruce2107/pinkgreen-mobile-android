@@ -25,11 +25,18 @@ internal class MktProductViewModel(
     private val _sku = MutableStateFlow<ViewState<MktSkusCodeReponseVO>?>(null)
     val sku: StateFlow<ViewState<MktSkusCodeReponseVO>?> = _sku
 
+    private val _favorite = MutableStateFlow<ViewState<Unit>?>(null)
+    val favorite: StateFlow<ViewState<Unit>?> = _favorite
+
     fun fetchProduct(id: Int) = viewModelScope.launch {
         repository.fetchProduct(id).map { converter.convert(it) }.collectViewState(_product)
     }
 
     fun fetchSkuCode(id: Int) = viewModelScope.launch {
         repository.fetchSkuCode(id).map { skuConverter.convert(it) }.collectViewState(_sku)
+    }
+
+    fun postFavorite(sku: String) = viewModelScope.launch {
+        repository.postFavorite(sku).collectViewState(_favorite)
     }
 }

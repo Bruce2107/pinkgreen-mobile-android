@@ -6,6 +6,7 @@
     <string name="price_template">R$ %1$.2f</string>
     <string name="buy">Comprar</string>
     <string name="cart">Carrinho</string>
+    <string name="favorites">Favoritos</string>
     <string name="btnBuy">Finalizar compra</string>
     <string name="remove_icon">Remover</string>
     <string name="favorite_icon">Adicionar aos favoritos</string>

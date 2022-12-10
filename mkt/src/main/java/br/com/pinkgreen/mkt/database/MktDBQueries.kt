@@ -64,6 +64,11 @@ internal class MktDBQueries(private val dbHelper: MktDBHelper) {
         return dbHelper.writableDatabase.insert(MktDBSchema.Product.TABLE_NAME, null, values)
     }
 
+    fun clearCart() {
+        val deletedRows =
+            dbHelper.writableDatabase.delete(MktDBSchema.Product.TABLE_NAME, null, null)
+    }
+
     fun destroy() {
         dbHelper.close()
     }

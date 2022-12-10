@@ -42,7 +42,12 @@ internal class MktCheckoutFragment : Fragment(), CustomKoinComponent {
     private var totalCost by Delegates.notNull<Double>()
 
     private var cart: MutableList<MktProductResponseVO> = mutableListOf()
-//    private val adapter = MktCheckoutAdapter(this, cart)
+    private val adapter =
+        MktCheckoutAdapter(this, cart, MktCheckoutAdapter.OnClickListener { item, pos ->
+            removeProduct(item, pos)
+        }, MktCheckoutAdapter.OnClickListener { item, _ ->
+            navigation.navigateFromCheckoutToDetails(item.id)
+        })
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -101,19 +106,19 @@ internal class MktCheckoutFragment : Fragment(), CustomKoinComponent {
             }
 
             updateTotal(cart)
-//            mktCheckoutList.adapter = adapter
-            mktCheckoutList.adapter = MktCheckoutAdapter(
-                fragment = this@MktCheckoutFragment,
-                products = cart,
-                onClickListener = MktCheckoutAdapter.OnClickListener { item, pos ->
-                    removeProduct(item, pos)
-                },
-                onCardClickListener = MktCheckoutAdapter.OnClickListener { item, _ ->
-                    navigation.navigateFromCheckoutToDetails(item.id)
-                }
-            )
+            mktCheckoutList.adapter = adapter
+//            mktCheckoutList.adapter = MktCheckoutAdapter(
+//                fragment = this@MktCheckoutFragment,
+//                products = cart,
+//                onClickListener = MktCheckoutAdapter.OnClickListener { item, pos ->
+//                    removeProduct(item, pos)
+//                },
+//                onCardClickListener = MktCheckoutAdapter.OnClickListener { item, _ ->
+//                    navigation.navigateFromCheckoutToDetails(item.id)
+//                }
+//            )
             mktCheckoutBuy.setOnClickListener {
-                Toast.makeText(context, "Compra realizada", Toast.LENGTH_SHORT).show()
+                buyAction()
             }
         }
         setupVisibility(content = true)
@@ -124,7 +129,7 @@ internal class MktCheckoutFragment : Fragment(), CustomKoinComponent {
             when (it.itemId) {
                 R.id.action_home -> navigation.navigateToHome()
                 R.id.action_cart -> {}
-                R.id.action_favorite -> navigation.navigateToFavourites(activity)
+                R.id.action_favorite -> navigation.navigateToFavourites()
                 R.id.action_settings -> navigation.navigateToSettings(activity)
             }
             true
@@ -180,7 +185,6 @@ internal class MktCheckoutFragment : Fragment(), CustomKoinComponent {
         dbQueries.deleteProduct(productResponseVO.id)
         cart.removeAt(pos)
         updateTotal(cart)
-        Toast.makeText(requireContext(), "Removido", Toast.LENGTH_SHORT).show()
     }
 
 //    private fun removeProduct(viewHolder: RecyclerView.ViewHolder) {
@@ -190,4 +194,12 @@ internal class MktCheckoutFragment : Fragment(), CustomKoinComponent {
 //        adapter.notifyItemRemoved(viewHolder.adapterPosition)
 //        Toast.makeText(requireContext(), "Removido", Toast.LENGTH_SHORT).show()
 //    }
+
+    private fun buyAction() {
+        dbQueries.clearCart()
+        cart.clear()
+        updateTotal(cart)
+        adapter.notifyDataSetChanged()
+        Toast.makeText(context, "Compra realizada", Toast.LENGTH_SHORT).show()
+    }
 }

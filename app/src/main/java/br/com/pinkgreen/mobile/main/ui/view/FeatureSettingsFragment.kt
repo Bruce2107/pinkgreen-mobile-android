@@ -13,9 +13,11 @@ import br.com.pinkgreen.mobile.main.MockApiResponse
 import br.com.pinkgreen.mobile.lib.PinkgreenApiImpl
 import br.com.pinkgreen.mobile.lib.RetrofitClient
 import br.com.pinkgreen.mobile.main.ui.view.adapters.PinkgreenApiOptionsAdapter
+import br.com.pinkgreen.mobile.main.ui.vo.PinkgreenFetchFavoritesOption
 import br.com.pinkgreen.mobile.main.ui.vo.PinkgreenFetchProductOption
 import br.com.pinkgreen.mobile.main.ui.vo.PinkgreenFetchProductsOption
 import br.com.pinkgreen.mobile.main.ui.vo.PinkgreenFetchSkuCodeOption
+import br.com.pinkgreen.mobile.main.ui.vo.PinkgreenPostFavoriteOption
 import br.com.pinkgreen.mobile.utils.Utils
 import retrofit2.Response
 
@@ -38,12 +40,23 @@ class FeatureSettingsFragment : Fragment() {
         response = MockApiResponse.MktProducts.fetchSkuCode
     )
 
+    private var postFavoriteOption = PinkgreenPostFavoriteOption(
+        title = "postFavorite",
+        response = MockApiResponse.MktProducts.postFavorite
+    )
+
+    private var fetchFavoritesOption = PinkgreenFetchFavoritesOption(
+        title = "postFavorite",
+        response = MockApiResponse.MktProducts.fetchFavorites
+    )
 
     private val apiOptions by lazy {
         listOf(
             fetchProductsOption,
             fetchProductOption,
-            fetchSkuCodeOption
+            fetchSkuCodeOption,
+            postFavoriteOption,
+            fetchFavoritesOption
         )
     }
 
@@ -102,6 +115,15 @@ class FeatureSettingsFragment : Fragment() {
                 )
             )
         )
+        fetchFavoritesOption = PinkgreenFetchFavoritesOption(
+            title = "fetchFavorites",
+            response = Response.success(
+                Utils.getJsonDataFromAsset(
+                    requireActivity().application,
+                    "favorites.json"
+                )
+            )
+        )
     }
 
     private fun startFeature() {
@@ -111,7 +133,9 @@ class FeatureSettingsFragment : Fragment() {
         val apiMock = MockApi(
             fetchProducts = fetchProductsOption,
             fetchProduct = fetchProductOption,
-            fetchSkuCode = fetchSkuCodeOption
+            fetchSkuCode = fetchSkuCodeOption,
+            postFavorite = postFavoriteOption,
+            fetchFavorites = fetchFavoritesOption,
         )
         val api = when (mode) {
             1 -> apiMock

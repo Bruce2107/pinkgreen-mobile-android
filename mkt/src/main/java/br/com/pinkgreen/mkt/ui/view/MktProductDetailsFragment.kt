@@ -81,6 +81,15 @@ internal class MktProductDetailsFragment : Fragment(), CustomKoinComponent {
                         }
                     }
                 }
+
+                launch {
+                    viewModel.favorite.collectIfNotNull {
+                        when (it) {
+                            is ViewState.OnSuccess -> onFavoriteSuccess()
+                            else -> {}
+                        }
+                    }
+                }
             }
         }
     }
@@ -103,7 +112,6 @@ internal class MktProductDetailsFragment : Fragment(), CustomKoinComponent {
     private fun onProductsSuccess(data: MktProductResponseVO) {
         with(binding) {
             mktDetailsPrice.text = getString(R.string.price_template, data.price)
-//            mktDetailsDescription.text = data.active.toString()
             mktDetailsName.text = data.name
             mktDetailsImage.apply {
                 load(data.mainImage) {
@@ -129,12 +137,16 @@ internal class MktProductDetailsFragment : Fragment(), CustomKoinComponent {
         }
     }
 
+    private fun onFavoriteSuccess() {
+        Toast.makeText(context, "Salvo com sucesso", Toast.LENGTH_SHORT).show()
+    }
+
     private fun setupNavbar(activity: FragmentActivity) = with(binding) {
         mktDetailsNavbar.navbar.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.action_home -> navigation.popBackStack()
                 R.id.action_cart -> navigation.navigateToCheckout()
-                R.id.action_favorite -> navigation.navigateToFavourites(activity)
+                R.id.action_favorite -> navigation.navigateToFavourites()
                 R.id.action_settings -> navigation.navigateToSettings(activity)
                 else -> viewModel.fetchProduct(productId)
             }
@@ -174,7 +186,8 @@ internal class MktProductDetailsFragment : Fragment(), CustomKoinComponent {
     }
 
     private fun addToFavorites() {
-        Toast.makeText(context, skuCode, Toast.LENGTH_SHORT).show()
+        viewModel.postFavorite(skuCode)
+//        Toast.makeText(context, skuCode, Toast.LENGTH_SHORT).show()
     }
 
 }

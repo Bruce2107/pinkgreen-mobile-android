@@ -1,5 +1,6 @@
 package br.com.pinkgreen.mobile.main.ui.vo
 
+import br.com.pinkgreen.mkt.data.dto.MktFavoriteResponseDTO
 import br.com.pinkgreen.mkt.data.dto.MktProductResponseDTO
 import br.com.pinkgreen.mkt.data.dto.MktSkuCodeResponseDTO
 import retrofit2.Response
@@ -20,4 +21,15 @@ class PinkgreenFetchSkuCodeOption(
     title: String,
     var response: Response<List<MktSkuCodeResponseDTO>>
 ) : PinkgreenApiOption(title)
+
+class PinkgreenPostFavoriteOption(
+    title: String,
+    var response: Response<Unit>
+) : PinkgreenApiOption(title)
+
+class PinkgreenFetchFavoritesOption(
+    title: String,
+    var response: Response<List<MktFavoriteResponseDTO>>
+) : PinkgreenApiOption(title)
+
 

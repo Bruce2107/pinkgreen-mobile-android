@@ -1,0 +1,114 @@
+[
+  {
+    "id": 1,
+    "skuCode": "A513-54-57EN",
+    "name": "Notebook Aspire 5 - Intel Core i3 - 4GB 256GB SSD 15,6” Full HD LED Windows 10",
+    "stockQuantity": 10,
+    "active": true,
+    "height": 10.0,
+    "width": 10.0,
+    "length": 10.0,
+    "weight": 10.0,
+    "mainImageUrl": "https://i.imgur.com/PchRPP7.png",
+    "urlImages": [],
+    "price": {
+      "listPrice": 3004.85,
+      "salePrice": 1458.32,
+      "startDate": "2022-08-23T01:44:19.235609500Z",
+      "endDate": "2022-09-01T01:44:19.235609500Z"
+    },
+    "skuAttributes": [
+      {
+        "label": "Memória RAM",
+        "type": "memory",
+        "value": "4GB"
+      },
+      {
+        "label": "Capacidade do SSD",
+        "type": "ssd",
+        "value": "256GB de armazenamento SSD NVMe x4"
+      },
+      {
+        "label": "Sistema operacional",
+        "type": "os",
+        "value": "Windows 10 Home 64-bit"
+      }
+    ],
+    "product": {
+      "id": 1,
+      "name": "Notebook Aspire 5",
+      "price": 3704.05,
+      "active": true,
+      "mainImageUrl": "https://i.imgur.com/PchRPP7.png",
+      "brand": {
+        "id": 1,
+        "name": "Acer",
+        "brandImage": "https://i.imgur.com/6wTcxmU.png"
+      },
+      "categories": [
+        {
+          "id": 1,
+          "name": "Informatica",
+          "image": "https://i.imgur.com/PchRPP7.png"
+        }
+      ]
+    },
+    "relatedSkus": null
+  },
+  {
+    "id": 6,
+    "skuCode": "AFRQF5-DWW-12EN",
+    "name": "Smart TV 50” Crystal 4K Samsung 50AU7700 - Wi-Fi Bluetooth HDR Alexa Built in 3 HDMI 1 USB",
+    "stockQuantity": 5,
+    "active": true,
+    "height": 100.0,
+    "width": 50.0,
+    "length": 10.0,
+    "weight": 10.0,
+    "mainImageUrl": "https://i.imgur.com/QiBNHzb.png",
+    "urlImages": [],
+    "price": {
+      "listPrice": 3704.05,
+      "salePrice": 0.0,
+      "startDate": "2021-06-15T03:00:00Z",
+      "endDate": "2021-06-15T03:00:00Z"
+    },
+    "skuAttributes": [
+      {
+        "label": "Memória RAM",
+        "type": "memory",
+        "value": "2GB"
+      },
+      {
+        "label": "Capacidade do SSD",
+        "type": "ssd",
+        "value": "20GB de armazenamento SSD NVMe x4"
+      },
+      {
+        "label": "Sistema operacional",
+        "type": "os",
+        "value": "Alexa Build"
+      }
+    ],
+    "product": {
+      "id": 4,
+      "name": "TV Samsung 50\"",
+      "price": 3000.0,
+      "active": true,
+      "mainImageUrl": "https://i.imgur.com/QiBNHzb.png",
+      "brand": {
+        "id": 3,
+        "name": "Samsung",
+        "brandImage": "https://i.imgur.com/OkgdSou.png"
+      },
+      "categories": [
+        {
+          "id": 2,
+          "name": "Eletrodomésticos",
+          "image": "https://i.imgur.com/Ye8Ecvoo.png"
+        }
+      ]
+    },
+    "relatedSkus": null
+  }
+]

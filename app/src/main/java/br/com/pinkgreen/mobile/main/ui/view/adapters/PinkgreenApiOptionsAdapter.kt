@@ -4,15 +4,18 @@ import android.app.Application
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import br.com.pinkgreen.mkt.data.dto.MktFavoriteResponseDTO
 import br.com.pinkgreen.mkt.data.dto.MktProductResponseDTO
 import br.com.pinkgreen.mkt.data.dto.MktSkuCodeResponseDTO
 import br.com.pinkgreen.mobile.R
 import br.com.pinkgreen.mobile.databinding.PinkgreenApiOptionItemBinding
 import br.com.pinkgreen.mobile.main.MockApiResponse
 import br.com.pinkgreen.mobile.main.ui.vo.PinkgreenApiOption
+import br.com.pinkgreen.mobile.main.ui.vo.PinkgreenFetchFavoritesOption
 import br.com.pinkgreen.mobile.main.ui.vo.PinkgreenFetchProductOption
 import br.com.pinkgreen.mobile.main.ui.vo.PinkgreenFetchProductsOption
 import br.com.pinkgreen.mobile.main.ui.vo.PinkgreenFetchSkuCodeOption
+import br.com.pinkgreen.mobile.main.ui.vo.PinkgreenPostFavoriteOption
 import br.com.pinkgreen.mobile.utils.Utils
 import retrofit2.Response
 
@@ -51,6 +54,15 @@ class PinkgreenApiOptionsAdapter(
                                         "sku.json"
                                     )
                                 )
+                            is PinkgreenPostFavoriteOption -> item.response =
+                                Response.success(Unit)
+                            is PinkgreenFetchFavoritesOption -> item.response =
+                                Response.success(
+                                    Utils.getJsonDataFromAsset<List<MktFavoriteResponseDTO>>(
+                                        application,
+                                        "sku.json"
+                                    )
+                                )
                         }
                     }
                     R.id.radio_button_error -> {
@@ -61,6 +73,10 @@ class PinkgreenApiOptionsAdapter(
                                 MockApiResponse.error as Response<MktProductResponseDTO>
                             is PinkgreenFetchSkuCodeOption -> item.response =
                                 MockApiResponse.error as Response<List<MktSkuCodeResponseDTO>>
+                            is PinkgreenPostFavoriteOption -> item.response =
+                                MockApiResponse.error as Response<Unit>
+                            is PinkgreenFetchFavoritesOption -> item.response =
+                                MockApiResponse.error as Response<List<MktFavoriteResponseDTO>>
                         }
                     }
                 }

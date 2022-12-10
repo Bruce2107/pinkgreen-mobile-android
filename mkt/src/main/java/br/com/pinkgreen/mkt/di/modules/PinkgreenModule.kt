@@ -6,11 +6,13 @@ import br.com.pinkgreen.mkt.data.repository.MktProductRepository
 import br.com.pinkgreen.mkt.data.repository.MktProductRepositoryImpl
 import br.com.pinkgreen.mkt.database.MktDBHelper
 import br.com.pinkgreen.mkt.database.MktDBQueries
+import br.com.pinkgreen.mkt.domain.converter.MktFavoriteConverter
 import br.com.pinkgreen.mkt.domain.converter.MktProductConverter
 import br.com.pinkgreen.mkt.domain.converter.MktProductsConverter
 import br.com.pinkgreen.mkt.domain.converter.MktSkuCodeConverter
 import br.com.pinkgreen.mkt.ui.view.navigation.MktNavigation
 import br.com.pinkgreen.mkt.ui.viewmodel.MktCheckoutViewModel
+import br.com.pinkgreen.mkt.ui.viewmodel.MktFavoritesViewModel
 import br.com.pinkgreen.mkt.ui.viewmodel.MktProductViewModel
 import br.com.pinkgreen.mkt.ui.viewmodel.MktProductsViewModel
 
@@ -32,6 +34,10 @@ val mktModule = module {
 
     factory {
         MktSkuCodeConverter()
+    }
+
+    factory {
+        MktFavoriteConverter()
     }
 
     factory { (fragment: Fragment) ->
@@ -57,6 +63,10 @@ val mktModule = module {
 
     viewModel {
         MktCheckoutViewModel(get(), get())
+    }
+
+    viewModel {
+        MktFavoritesViewModel(get(), get())
     }
 
 }

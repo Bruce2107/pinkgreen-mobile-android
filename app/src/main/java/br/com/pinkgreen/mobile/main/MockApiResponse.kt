@@ -2,6 +2,7 @@ package br.com.pinkgreen.mobile.main
 
 import br.com.pinkgreen.mkt.data.dto.MktBrandResponseDTO
 import br.com.pinkgreen.mkt.data.dto.MktCategoryResponseDTO
+import br.com.pinkgreen.mkt.data.dto.MktFavoriteResponseDTO
 import br.com.pinkgreen.mkt.data.dto.MktProductResponseDTO
 import br.com.pinkgreen.mkt.data.dto.MktSkuCodeResponseDTO
 import okhttp3.ResponseBody.Companion.toResponseBody
@@ -178,6 +179,39 @@ object MockApiResponse {
             Response.success(
                 listOf(
                     MktSkuCodeResponseDTO(skuCode = "MGD93BZA")
+                )
+            )
+        }
+
+        val postFavorite: Response<Unit> by lazy {
+            Response.success(Unit)
+        }
+
+        val fetchFavorites: Response<List<MktFavoriteResponseDTO>> by lazy {
+            Response.success(
+                listOf(
+                    MktFavoriteResponseDTO(
+                        skuCode = "MGD93BZA",
+                        product = MktProductResponseDTO(
+                            id = 1,
+                            name = "Notebook Aspire 5",
+                            price = 3704.05,
+                            active = true,
+                            mainImageUrl = "https://i.imgur.com/PchRPP7.png",
+                            brand = MktBrandResponseDTO(
+                                id = 1,
+                                name = "Acer",
+                                brandImage = "https://i.imgur.com/6wTcxmU.png"
+                            ),
+                            categories = listOf(
+                                MktCategoryResponseDTO(
+                                    id = 1,
+                                    name = "Informatica",
+                                    image = "https://i.imgur.com/PchRPP7.png"
+                                )
+                            )
+                        )
+                    )
                 )
             )
         }

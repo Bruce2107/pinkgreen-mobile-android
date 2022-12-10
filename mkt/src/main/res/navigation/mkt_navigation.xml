@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_any_to_checkout"
             app:destination="@id/mktCheckoutFragment" />
+        <action
+            android:id="@+id/action_any_to_favorites"
+            app:destination="@id/mktFavoritesFragment" />
     </fragment>
     <fragment
         android:id="@+id/mktProductDetailsFragment"
@@ -27,18 +30,40 @@
         <action
             android:id="@id/action_any_to_checkout"
             app:destination="@id/mktCheckoutFragment" />
+        <action
+            android:id="@+id/action_any_to_favorites"
+            app:destination="@id/mktFavoritesFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/mktCheckoutFragment"
         android:name="br.com.pinkgreen.mkt.ui.view.MktCheckoutFragment"
-        android:label="MktProductDetailsFragment"
+        android:label="MktCheckoutFragment"
         tools:layout="@layout/fragment_mkt_checkout">
         <action
             android:id="@id/action_any_to_home"
             app:destination="@id/mktProductsFragment" />
         <action
             android:id="@+id/action_checkout_to_product_details"
+            app:destination="@id/mktProductDetailsFragment" />
+        <action
+            android:id="@+id/action_any_to_favorites"
+            app:destination="@id/mktFavoritesFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mktFavoritesFragment"
+        android:name="br.com.pinkgreen.mkt.ui.view.MktFavoritesFragment"
+        android:label="MktFavoritesFragment"
+        tools:layout="@layout/fragment_mkt_favorites">
+        <action
+            android:id="@id/action_any_to_home"
+            app:destination="@id/mktProductsFragment" />
+        <action
+            android:id="@id/action_any_to_checkout"
+            app:destination="@id/mktCheckoutFragment" />
+        <action
+            android:id="@+id/action_list_to_product_details"
             app:destination="@id/mktProductDetailsFragment" />
     </fragment>
 </navigation>

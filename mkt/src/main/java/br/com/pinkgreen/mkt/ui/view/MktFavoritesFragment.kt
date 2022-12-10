@@ -13,25 +13,25 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.RecyclerView
 import br.com.pinkgreen.mkt.R
-import br.com.pinkgreen.mkt.databinding.FragmentMktProductsBinding
+import br.com.pinkgreen.mkt.databinding.FragmentMktFavoritesBinding
 import br.com.pinkgreen.mkt.di.CustomKoinComponent
 import br.com.pinkgreen.mkt.ui.view.adpaters.MktProductListAdapter
 import br.com.pinkgreen.mkt.ui.view.navigation.MktNavigation
-import br.com.pinkgreen.mkt.ui.viewmodel.MktProductsViewModel
+import br.com.pinkgreen.mkt.ui.viewmodel.MktFavoritesViewModel
 import br.com.pinkgreen.mkt.ui.viewstate.ErrorType
 import br.com.pinkgreen.mkt.ui.viewstate.ViewState
 import br.com.pinkgreen.mkt.ui.viewstate.collectIfNotNull
-import br.com.pinkgreen.mkt.ui.vo.MktProductsResponseVO
+import br.com.pinkgreen.mkt.ui.vo.MktFavoritesResponseVO
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-internal class MktProductsFragment : Fragment(), CustomKoinComponent {
-    private var _binding: FragmentMktProductsBinding? = null
+internal class MktFavoritesFragment : Fragment(), CustomKoinComponent {
+    private var _binding: FragmentMktFavoritesBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: MktProductsViewModel by viewModel()
+    private val viewModel: MktFavoritesViewModel by viewModel()
     private val navigation: MktNavigation by inject { parametersOf(this) }
 
     override fun onCreateView(
@@ -39,14 +39,14 @@ internal class MktProductsFragment : Fragment(), CustomKoinComponent {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentMktProductsBinding.inflate(inflater, container, false)
+        _binding = FragmentMktFavoritesBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.fetchProducts()
+        viewModel.fetchFavorites()
         setupObservers()
         setupVisibility()
         setupNavbar(requireActivity())
@@ -56,7 +56,7 @@ internal class MktProductsFragment : Fragment(), CustomKoinComponent {
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
-                    viewModel.products.collectIfNotNull {
+                    viewModel.favorites.collectIfNotNull {
                         when (it) {
                             ViewState.OnLoading -> onProductsLoading()
                             is ViewState.OnError -> onProductsError(it.errorType)
@@ -76,15 +76,15 @@ internal class MktProductsFragment : Fragment(), CustomKoinComponent {
     }
 
     private fun onProductsError(errorType: ErrorType) {
-        onError(errorType) { viewModel.fetchProducts() }
+        onError(errorType) { viewModel.fetchFavorites() }
     }
 
     private fun onProductsLoading() {
         setupVisibility(loading = true)
     }
 
-    private fun onProductsSuccess(data: MktProductsResponseVO) {
-        binding.mktProductList.addItemDecoration(object : RecyclerView.ItemDecoration() {
+    private fun onProductsSuccess(data: MktFavoritesResponseVO) {
+        binding.mktFavoritesProductList.addItemDecoration(object : RecyclerView.ItemDecoration() {
             override fun getItemOffsets(
                 outRect: Rect,
                 view: View,
@@ -95,10 +95,10 @@ internal class MktProductsFragment : Fragment(), CustomKoinComponent {
                 outRect.set(20, 12, 20, 12)
             }
         })
-        binding.mktProductList.adapter =
+        binding.mktFavoritesProductList.adapter =
             MktProductListAdapter(
                 fragment = this,
-                products = data.products,
+                products = data.favorites,
                 onClickListener = MktProductListAdapter.OnClickListener {
                     fastBuyAction(it.id)
                 })
@@ -112,24 +112,28 @@ internal class MktProductsFragment : Fragment(), CustomKoinComponent {
     private fun setupNavbar(activity: FragmentActivity) = with(binding) {
         mktHomeNavbar.navbar.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.action_home -> viewModel.fetchProducts()
+                R.id.action_home -> navigation.navigateToHome()
                 R.id.action_cart -> navigation.navigateToCheckout()
-                R.id.action_favorite -> navigation.navigateToFavourites()
+                R.id.action_favorite -> viewModel.fetchFavorites()
                 R.id.action_settings -> navigation.navigateToSettings(activity)
-                else -> viewModel.fetchProducts()
+                else -> viewModel.fetchFavorites()
             }
             true
         }
     }
 
-    private fun setupVisibility(loading: Boolean = false, content: Boolean = false, error: Boolean = false) =
+    private fun setupVisibility(
+        loading: Boolean = false,
+        content: Boolean = false,
+        error: Boolean = false
+    ) =
         with(binding) {
-            mktHomeLoading.root.isVisible = loading
-            mktHomeContentGroup.isVisible = content
+            mktFavoritesLoading.root.isVisible = loading
+            mktFavoritesContentGroup.isVisible = content
             mktErrorScreen.root.isVisible = error
             if (loading) {
                 root.post {
-                    mktHomeLoading.root.announceForAccessibility(
+                    mktFavoritesLoading.root.announceForAccessibility(
                         requireContext().getString(
                             R.string.loading
                         )
@@ -137,5 +141,4 @@ internal class MktProductsFragment : Fragment(), CustomKoinComponent {
                 }
             }
         }
-
 }
