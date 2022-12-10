@@ -8,6 +8,7 @@ import br.com.pinkgreen.mkt.database.MktDBHelper
 import br.com.pinkgreen.mkt.database.MktDBQueries
 import br.com.pinkgreen.mkt.domain.converter.MktProductConverter
 import br.com.pinkgreen.mkt.domain.converter.MktProductsConverter
+import br.com.pinkgreen.mkt.domain.converter.MktSkuCodeConverter
 import br.com.pinkgreen.mkt.ui.view.navigation.MktNavigation
 import br.com.pinkgreen.mkt.ui.viewmodel.MktCheckoutViewModel
 import br.com.pinkgreen.mkt.ui.viewmodel.MktProductViewModel
@@ -29,6 +30,10 @@ val mktModule = module {
         MktProductConverter()
     }
 
+    factory {
+        MktSkuCodeConverter()
+    }
+
     factory { (fragment: Fragment) ->
         MktNavigation(WeakReference(fragment.findNavController()))
     }
@@ -47,7 +52,7 @@ val mktModule = module {
     }
 
     viewModel {
-        MktProductViewModel(get(), get())
+        MktProductViewModel(get(), get(), get())
     }
 
     viewModel {

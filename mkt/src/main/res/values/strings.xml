@@ -8,6 +8,7 @@
     <string name="cart">Carrinho</string>
     <string name="btnBuy">Finalizar compra</string>
     <string name="remove_icon">Remover</string>
+    <string name="favorite_icon">Adicionar aos favoritos</string>
     <string name="error_title">Ops, ocorreu um erro</string>
     <string name="try_again">tente novamente</string>
 </resources>

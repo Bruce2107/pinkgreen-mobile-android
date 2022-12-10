@@ -3,6 +3,7 @@ package br.com.pinkgreen.mobile.main
 import br.com.pinkgreen.mkt.data.dto.MktBrandResponseDTO
 import br.com.pinkgreen.mkt.data.dto.MktCategoryResponseDTO
 import br.com.pinkgreen.mkt.data.dto.MktProductResponseDTO
+import br.com.pinkgreen.mkt.data.dto.MktSkuCodeResponseDTO
 import okhttp3.ResponseBody.Companion.toResponseBody
 import retrofit2.Response
 
@@ -169,6 +170,14 @@ object MockApiResponse {
                             image = "https://i.imgur.com/PchRPP7.png"
                         )
                     )
+                )
+            )
+        }
+
+        val fetchSkuCode: Response<List<MktSkuCodeResponseDTO>> by lazy {
+            Response.success(
+                listOf(
+                    MktSkuCodeResponseDTO(skuCode = "MGD93BZA")
                 )
             )
         }

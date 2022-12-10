@@ -22,6 +22,7 @@ import br.com.pinkgreen.mkt.ui.viewstate.ErrorType
 import br.com.pinkgreen.mkt.ui.viewstate.ViewState
 import br.com.pinkgreen.mkt.ui.viewstate.collectIfNotNull
 import br.com.pinkgreen.mkt.ui.vo.MktProductResponseVO
+import br.com.pinkgreen.mkt.ui.vo.MktSkusCodeReponseVO
 import coil.load
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -38,6 +39,7 @@ internal class MktProductDetailsFragment : Fragment(), CustomKoinComponent {
     private val dbHelper: MktDBHelper by inject()
 
     private var productId by Delegates.notNull<Int>()
+    private var skuCode by Delegates.notNull<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,6 +54,7 @@ internal class MktProductDetailsFragment : Fragment(), CustomKoinComponent {
         super.onViewCreated(view, savedInstanceState)
         productId = arguments?.getInt("id") ?: 0
         viewModel.fetchProduct(productId)
+        viewModel.fetchSkuCode(productId)
         setupObservers()
         setupVisibility()
         setupNavbar(requireActivity())
@@ -66,6 +69,15 @@ internal class MktProductDetailsFragment : Fragment(), CustomKoinComponent {
                             ViewState.OnLoading -> onProductsLoading()
                             is ViewState.OnError -> onProductsError(it.errorType)
                             is ViewState.OnSuccess -> onProductsSuccess(it.data)
+                        }
+                    }
+                }
+
+                launch {
+                    viewModel.sku.collectIfNotNull {
+                        when (it) {
+                            is ViewState.OnSuccess -> onSkuCodeSuccess(it.data)
+                            else -> {}
                         }
                     }
                 }
@@ -91,7 +103,7 @@ internal class MktProductDetailsFragment : Fragment(), CustomKoinComponent {
     private fun onProductsSuccess(data: MktProductResponseVO) {
         with(binding) {
             mktDetailsPrice.text = getString(R.string.price_template, data.price)
-            mktDetailsDescription.text = data.active.toString()
+//            mktDetailsDescription.text = data.active.toString()
             mktDetailsName.text = data.name
             mktDetailsImage.apply {
                 load(data.mainImage) {
@@ -103,8 +115,18 @@ internal class MktProductDetailsFragment : Fragment(), CustomKoinComponent {
             mktDetailsBuy.setOnClickListener {
                 addToCart(data)
             }
+
         }
         setupVisibility(content = true)
+    }
+
+    private fun onSkuCodeSuccess(data: MktSkusCodeReponseVO) {
+        skuCode = data.skus[0].skuCode
+        setupVisibility(favorite = true, content = true)
+
+        binding.mktDetailsFavoriteButton.setOnClickListener {
+            addToFavorites()
+        }
     }
 
     private fun setupNavbar(activity: FragmentActivity) = with(binding) {
@@ -123,12 +145,14 @@ internal class MktProductDetailsFragment : Fragment(), CustomKoinComponent {
     private fun setupVisibility(
         loading: Boolean = false,
         content: Boolean = false,
-        error: Boolean = false
+        error: Boolean = false,
+        favorite: Boolean = false
     ) =
         with(binding) {
             mktDetailsLoading.root.isVisible = loading
             mktDetailsContentGroup.isVisible = content
             mktErrorScreen.root.isVisible = error
+            mktDetailsFavoriteButton.isVisible = favorite
             if (loading) {
                 root.post {
                     mktDetailsLoading.root.announceForAccessibility(
@@ -147,6 +171,10 @@ internal class MktProductDetailsFragment : Fragment(), CustomKoinComponent {
             return
         }
         Toast.makeText(context, "Erro ao carrinho", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun addToFavorites() {
+        Toast.makeText(context, skuCode, Toast.LENGTH_SHORT).show()
     }
 
 }

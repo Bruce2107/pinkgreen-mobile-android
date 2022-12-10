@@ -15,6 +15,7 @@ import br.com.pinkgreen.mobile.lib.RetrofitClient
 import br.com.pinkgreen.mobile.main.ui.view.adapters.PinkgreenApiOptionsAdapter
 import br.com.pinkgreen.mobile.main.ui.vo.PinkgreenFetchProductOption
 import br.com.pinkgreen.mobile.main.ui.vo.PinkgreenFetchProductsOption
+import br.com.pinkgreen.mobile.main.ui.vo.PinkgreenFetchSkuCodeOption
 import br.com.pinkgreen.mobile.utils.Utils
 import retrofit2.Response
 
@@ -32,11 +33,17 @@ class FeatureSettingsFragment : Fragment() {
         response = MockApiResponse.MktProducts.fetchProduct
     )
 
+    private var fetchSkuCodeOption = PinkgreenFetchSkuCodeOption(
+        title = "fetchSkuCode",
+        response = MockApiResponse.MktProducts.fetchSkuCode
+    )
+
 
     private val apiOptions by lazy {
         listOf(
             fetchProductsOption,
-            fetchProductOption
+            fetchProductOption,
+            fetchSkuCodeOption
         )
     }
 
@@ -86,6 +93,15 @@ class FeatureSettingsFragment : Fragment() {
                 )
             )
         )
+        fetchSkuCodeOption = PinkgreenFetchSkuCodeOption(
+            title = "fetchSkuCode",
+            response = Response.success(
+                Utils.getJsonDataFromAsset(
+                    requireActivity().application,
+                    "sku.json"
+                )
+            )
+        )
     }
 
     private fun startFeature() {
@@ -94,7 +110,8 @@ class FeatureSettingsFragment : Fragment() {
 
         val apiMock = MockApi(
             fetchProducts = fetchProductsOption,
-            fetchProduct = fetchProductOption
+            fetchProduct = fetchProductOption,
+            fetchSkuCode = fetchSkuCodeOption
         )
         val api = when (mode) {
             1 -> apiMock

@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.pinkgreen.mkt.data.dto.MktProductResponseDTO
+import br.com.pinkgreen.mkt.data.dto.MktSkuCodeResponseDTO
 import br.com.pinkgreen.mobile.R
 import br.com.pinkgreen.mobile.databinding.PinkgreenApiOptionItemBinding
 import br.com.pinkgreen.mobile.main.MockApiResponse
 import br.com.pinkgreen.mobile.main.ui.vo.PinkgreenApiOption
 import br.com.pinkgreen.mobile.main.ui.vo.PinkgreenFetchProductOption
 import br.com.pinkgreen.mobile.main.ui.vo.PinkgreenFetchProductsOption
+import br.com.pinkgreen.mobile.main.ui.vo.PinkgreenFetchSkuCodeOption
 import br.com.pinkgreen.mobile.utils.Utils
 import retrofit2.Response
 
@@ -39,7 +41,14 @@ class PinkgreenApiOptionsAdapter(
                                 Response.success(
                                     Utils.getJsonDataFromAsset<MktProductResponseDTO>(
                                         application,
-                                        "product.josn"
+                                        "product.json"
+                                    )
+                                )
+                            is PinkgreenFetchSkuCodeOption -> item.response =
+                                Response.success(
+                                    Utils.getJsonDataFromAsset<List<MktSkuCodeResponseDTO>>(
+                                        application,
+                                        "sku.json"
                                     )
                                 )
                         }
@@ -50,6 +59,8 @@ class PinkgreenApiOptionsAdapter(
                                 MockApiResponse.error as Response<List<MktProductResponseDTO>>
                             is PinkgreenFetchProductOption -> item.response =
                                 MockApiResponse.error as Response<MktProductResponseDTO>
+                            is PinkgreenFetchSkuCodeOption -> item.response =
+                                MockApiResponse.error as Response<List<MktSkuCodeResponseDTO>>
                         }
                     }
                 }

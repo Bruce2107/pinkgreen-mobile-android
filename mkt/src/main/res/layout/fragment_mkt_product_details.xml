@@ -27,13 +27,25 @@
 
     <ImageView
         android:id="@+id/mkt_details_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toStartOf="@+id/mkt_details_vertical_guideline_end"
         app:layout_constraintStart_toStartOf="@+id/mkt_details_vertical_guideline_start"
         app:layout_constraintTop_toBottomOf="@+id/mkt_details_name"
         tools:srcCompat="@tools:sample/avatars" />
+
+
+    <CheckBox
+        android:id="@+id/mkt_details_favorite_button"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:visibility="gone"
+        android:layout_marginStart="-10dp"
+        tools:visibility="visible"
+        android:button="@drawable/checkbox_selector"
+        app:layout_constraintEnd_toStartOf="@id/mkt_details_image"
+        app:layout_constraintTop_toBottomOf="@id/mkt_details_image"/>
 
     <Button
         android:id="@+id/mkt_details_buy"
@@ -74,7 +86,7 @@
         android:id="@+id/mkt_details_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@tools:sample/lorem[20]"
+        tools:text="@tools:sample/lorem[20]"
         android:textColor="@color/text"
         app:layout_constraintBottom_toTopOf="@+id/mkt_details_buy"
         app:layout_constraintEnd_toStartOf="@+id/mkt_details_vertical_guideline_end"
@@ -114,6 +126,8 @@
         layout="@layout/navbar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mkt_details_name" />
+        app:layout_constraintTop_toBottomOf="@id/mkt_details_name"
+        app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>
